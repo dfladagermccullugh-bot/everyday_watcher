@@ -5,3 +5,4 @@ src/data/generated
 public/data
 *.tsbuildinfo
 next-env.d.ts
+.netlify
