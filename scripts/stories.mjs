@@ -19,7 +19,7 @@ export const DAY = [
     title: 'Driving to work',
     line: 'A car is both a sensor and a thing that is sensed.',
     body: 'Roadside readers record the vehicle. Systems inside the vehicle record how it is driven. The phone in your pocket keeps reporting too.',
-    rows: [[10, 'l'], [7, 'l'], [8, 'l'], [9, 'l'], [185, 'l'], [12, 'l'], [11, 'l'], [200, 'k'], [199, 'k'], [203, 'k'], [169, 'k'], [39, 'k'], [88, 'c'], [226, 'l']],
+    rows: [[10, 'l'], ['Fixed neighborhood ALPR networks', 'l'], ['Mobile municipal ALPR scanning fleets', 'l'], ['Connected-car data broker feeds', 'k'], [7, 'l'], [8, 'l'], [9, 'l'], [185, 'l'], [12, 'l'], [11, 'l'], [200, 'k'], [199, 'k'], [203, 'k'], [169, 'k'], [39, 'k'], [88, 'c'], [226, 'l']],
     feature: 'plates',
   },
   {
@@ -28,7 +28,7 @@ export const DAY = [
     title: 'Walking through public space',
     line: 'The street records presence without asking for it.',
     body: 'Cameras, microphones, and counters are part of the street. A phone’s radios can be observed by systems you never interact with.',
-    rows: [[1, 'l'], [13, 'l'], [16, 'l'], [46, 'l'], [47, 'l'], [227, 'l'], [225, 'l'], [4, 'c'], [192, 'k'], [188, 'k'], [184, 'k'], [33, 'l'], [37, 'c']],
+    rows: [[1, 'l'], [13, 'l'], ['Real-Time Crime Centers (RTCCs) & camera registries', 'l'], [16, 'l'], [46, 'l'], [47, 'l'], [227, 'l'], [225, 'l'], [4, 'c'], [192, 'k'], [188, 'k'], [184, 'k'], [33, 'l'], [37, 'c']],
   },
   {
     id: 'work',
@@ -36,7 +36,7 @@ export const DAY = [
     title: 'Entering a workplace',
     line: 'A badge opens the door and writes down that it did.',
     body: 'Managed workplaces can log access, devices, and communications. Some convert that activity into scores.',
-    rows: [[182, 'k'], [256, 'k'], [229, 'k'], [230, 'k'], [2, 'c'], [248, 'k'], [110, 'k'], [112, 'k'], [253, 'k'], [254, 'k'], [250, 'k'], [251, 'k'], [252, 'k'], [147, 'k'], [289, 'k']],
+    rows: [[182, 'k'], [256, 'k'], [229, 'k'], [230, 'k'], ['Sociometric employee badges', 'k'], ['OS-level screen-capture & recall indexing', 'k'], [2, 'c'], [248, 'k'], [110, 'k'], [112, 'k'], [253, 'k'], [254, 'k'], [250, 'k'], [251, 'k'], [252, 'k'], [147, 'k'], [289, 'k']],
   },
   {
     id: 'shop',
@@ -44,7 +44,7 @@ export const DAY = [
     title: 'Shopping at lunch',
     line: 'Checkout is a data event as much as a payment.',
     body: 'A card links merchant, time, and amount. A loyalty number links this trip to every earlier one. In some stores, cameras and radios measure the visit itself.',
-    rows: [[157, 'c'], [159, 'c'], [160, 'k'], [2, 'c'], [179, 'c'], [180, 'k'], [162, 'k'], [40, 'l'], [41, 'l'], [193, 'l'], [189, 'l'], [284, 'l'], [181, 'l'], [286, 'k']],
+    rows: [[157, 'c'], [159, 'c'], [160, 'k'], ['Card-linked offers & offline purchase attribution', 'k'], ['Retail return-fraud & ban databases', 'k'], [2, 'c'], [179, 'c'], [180, 'k'], [162, 'k'], [40, 'l'], [41, 'l'], [193, 'l'], [189, 'l'], [284, 'l'], [181, 'l'], [286, 'k']],
   },
   {
     id: 'browse',
@@ -84,7 +84,7 @@ export const DAY = [
     title: 'Returning home',
     line: 'A house now keeps its own diary.',
     body: 'Doors, thermostats, meters, and appliances can each record when the household is active. Together they describe a routine.',
-    rows: [[4, 'k'], [221, 'k'], [218, 'k'], [219, 'k'], [216, 'k'], [217, 'k'], [222, 'k'], [223, 'k'], [224, 'k'], [212, 'l'], [215, 'l'], [220, 'k'], [177, 'c'], [206, 'k']],
+    rows: [[4, 'k'], [221, 'k'], [218, 'k'], [219, 'k'], [216, 'k'], [217, 'k'], [222, 'k'], [223, 'k'], [224, 'k'], [212, 'l'], [215, 'l'], ['Non-intrusive appliance load monitoring (NILM)', 'l'], ['Wastewater-based epidemiology', 'l'], [220, 'k'], [177, 'c'], [206, 'k']],
   },
 ];
 
@@ -98,7 +98,7 @@ export const FLOWS = [
     title: 'A license plate',
     lede: 'A car passes a pole-mounted camera.',
     steps: [
-      { stage: 'collect', text: 'A camera captures an image of the vehicle and its plate.', rows: [10, 7], line: 37, basis: 'documented' },
+      { stage: 'collect', text: 'A camera captures an image of the vehicle and its plate. The spreadsheet lists fixed neighborhood networks and vehicle-mounted fleets as separate deployment models.', rows: [10, 'Fixed neighborhood ALPR networks', 'Mobile municipal ALPR scanning fleets'], line: 37, basis: 'documented' },
       { stage: 'link', text: 'Plate recognition converts the image into searchable structured data: plate, place, and time.', rows: [10], line: 39, basis: 'documented' },
       { stage: 'derive', text: 'Retained across many readers, the records can form a location history rather than only a traffic-enforcement record.', rows: [10, 292], line: 39, basis: 'documented' },
       { stage: 'use', text: 'Records may be searched under the rules of the system that holds them. The report does not document specific search, sharing, or retention rules for any deployment.', rows: [277], line: 343, basis: 'illustrative' },
@@ -197,6 +197,8 @@ export const FLOWS = [
 // The plate-reader context section: systems that can record a single car trip.
 export const TRIP = [
   { row: 10, where: 'Roadside', visible: true },
+  { row: 'Fixed neighborhood ALPR networks', where: 'Roadside', visible: true },
+  { row: 'Mobile municipal ALPR scanning fleets', where: 'Roadside', visible: true },
   { row: 7, where: 'Roadside', visible: true },
   { row: 8, where: 'Intersection', visible: true },
   { row: 9, where: 'Roadside', visible: true },
@@ -213,5 +215,7 @@ export const TRIP = [
   { row: 126, where: 'In the phone', visible: false },
   { row: 95, where: 'In the phone', visible: false },
   { row: 96, where: 'Downstream', visible: false },
+  { row: 'Connected-car data broker feeds', where: 'Downstream', visible: false },
+  { row: 'In-car infotainment forensics', where: 'Downstream', visible: false },
   { row: 205, where: 'In the phone', visible: false },
 ];

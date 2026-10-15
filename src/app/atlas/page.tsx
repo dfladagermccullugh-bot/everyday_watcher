@@ -6,7 +6,7 @@ import { entries, meta } from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'Atlas',
-  description: 'Search and filter all 292 documented surveillance and data-collection systems by signal, category, operator, and date status.',
+  description: 'Search and filter all 326 documented surveillance and data-collection systems by signal, category, period, source, and operator.',
 };
 
 export default function AtlasPage() {
@@ -18,8 +18,8 @@ export default function AtlasPage() {
           from in the report, what it connects to, and how certain its date is.
         </p>
         <p className="mt-3 text-sm text-paper-3">
-          The supplied files contain the original purpose and year for {meta.counts.purposeCsv} rows. Other purposes paraphrase the report and are
-          marked as such.
+          Name, purpose, and year come from the project spreadsheet. {meta.counts.inReport} systems are also described in the research report;{' '}
+          {meta.counts.sheetOnly} were added in the spreadsheet only.
         </p>
       </PageIntro>
       <Suspense fallback={<div className="mt-10 h-96 animate-pulse rounded-3xl bg-ink-2" />}>

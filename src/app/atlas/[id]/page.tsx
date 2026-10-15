@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const e = getEntry(id);
   if (!e) return {};
-  const description = `${e.purpose} ${CATEGORIES[e.category].label}. Implementation year: ${e.year ?? 'not in supplied files'}.`;
+  const description = `${e.purpose} ${CATEGORIES[e.category].label}. Implementation year: ${e.year}.`;
   return { title: e.name, description, openGraph: { title: e.name, description } };
 }
 

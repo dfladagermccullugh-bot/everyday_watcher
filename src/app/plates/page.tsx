@@ -23,7 +23,7 @@ const CONSIDERATIONS = [
   },
   {
     title: 'Public safety',
-    supported: 'The CSV describes the purpose as converting plate images into searchable plate, place, and time records. Link analysis can model relationships among vehicles and other entities.',
+    supported: 'The spreadsheet gives the purpose as identifying vehicles and recording plates with associated locations and times. The report notes that link analysis can model relationships among vehicles and other entities.',
     lines: [39, 343],
     questions: ['What outcomes does the deployment measure?', 'How are misreads caught before they are acted on?'],
   },
@@ -41,7 +41,7 @@ export default function PlatesPage() {
       <Shell className="pb-16 pt-[calc(var(--nav-h)+3.5rem)]">
         <PageIntro eyebrow="Focus · Automated license-plate recognition" title="The plate reader, in context.">
           <p>
-            Automated plate readers can attract public concern. In the research, they are one entry in an inventory of 292.
+            Automated plate readers can attract public concern. In the spreadsheet, plate recognition appears in five forms among 326 systems.
             This section explains what the research says about them, places them beside related systems, and shows how much else can record the same
             trip.
           </p>
@@ -50,8 +50,9 @@ export default function PlatesPage() {
         <aside className="mt-10 max-w-3xl rounded-2xl border border-dashed border-line-3 p-5 text-sm leading-relaxed text-paper-2">
           <p className="eyebrow !text-paper-2">A note on Flock Safety</p>
           <p className="mt-2">
-            Flock Safety, named in this project’s brief, is a commercial vendor of plate-reader cameras. The supplied research does not mention Flock or any
-            other plate-reader vendor. Nothing on this page describes Flock’s products, data practices, or contracts; it describes ALPR as the report does.
+            Flock Safety, named in this project’s brief, is a commercial vendor of plate-reader cameras. The research names no vendors. The updated
+            spreadsheet does list <em>fixed neighborhood ALPR networks</em> (2017) and <em>mobile municipal ALPR scanning fleets</em> (2009) as their
+            own systems. Nothing on this page describes Flock’s products, data practices, or contracts.
           </p>
         </aside>
       </Shell>
@@ -81,8 +82,9 @@ export default function PlatesPage() {
             </div>
             <div className="text-[0.9375rem] leading-relaxed text-paper-2 lg:col-span-6 lg:col-start-7">
               <p>
-                The CSV dates ANPR/ALPR to approximately the 1970s. The report cautions that the date depends on what counts as implementation: early
-                recognition research and police trials preceded today’s networked databases by decades. These systems are related, not identical.
+                The spreadsheet dates ANPR/ALPR to 1979, mobile municipal scanning fleets to 2009, and fixed neighborhood networks to 2017. The report
+                cautions that the date depends on what counts as implementation: early recognition research and police trials preceded today’s
+                networked databases by decades. Several roadside systems are older still. These systems are related, not identical.
               </p>
               <SourceRef line={434} className="mt-2" />
             </div>

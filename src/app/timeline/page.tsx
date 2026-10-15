@@ -10,13 +10,12 @@ export const metadata: Metadata = {
 };
 
 export default function TimelinePage() {
-  const placed = entries.filter((e) => e.pos.start != null).length;
   return (
     <Shell wide className="pb-28 pt-[calc(var(--nav-h)+3.5rem)]">
-      <PageIntro eyebrow="The 50-Year Timeline" title="When the systems arrived, as far as the record shows.">
+      <PageIntro eyebrow="The Timeline" title="When the systems arrived, as far as the record shows.">
         <p>
-          {placed} systems carry a date in the supplied research, alongside the laws and oversight that framed them. Press play to move through history,
-          select a period, or highlight a category.
+          All {entries.length} systems, placed by the year the spreadsheet gives for each, alongside the laws and oversight the report records. Press
+          play to move through history, select a period, or highlight a category. Zoom in to read every label.
         </p>
       </PageIntro>
       <Suspense fallback={<div className="mt-10 h-[600px] animate-pulse rounded-3xl bg-ink-2" />}>

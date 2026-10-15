@@ -2,6 +2,8 @@
 // basis "documented": the cited report line states the relationship.
 // basis "illustrative": a plausible example the report does not state. Shown dashed
 // and labeled as such everywhere in the interface.
+// Rows are report inventory numbers, or exact spreadsheet names for rows the report
+// does not describe. Illustrative relationships may have no report line (null).
 // [fromRow, toRow, type, basis, line, note]
 //   type: feeds (data from A is used by B) · extends · succeeds · authorizes
 //         alternative · combines
@@ -127,4 +129,33 @@ export const RELATIONS = [
   [14, 292, 'extends', 'documented', 365, 'Trajectory reconstruction across many sensors generalizes multi-camera tracking.'],
   [84, 277, 'feeds', 'documented', 343, 'Link analysis models relationships among calls.'],
   [157, 277, 'feeds', 'documented', 343, 'Link analysis models relationships among transactions.'],
+  // Rows added in the spreadsheet. The report does not describe them, so every
+  // relationship here is illustrative: inferred from the rows' names and purposes.
+  [10, 'Fixed neighborhood ALPR networks', 'extends', 'illustrative', null, 'A fixed network of plate readers is one deployment model of ALPR.'],
+  [10, 'Mobile municipal ALPR scanning fleets', 'extends', 'illustrative', null, 'Vehicle-mounted readers are another deployment model of ALPR.'],
+  ['Fixed neighborhood ALPR networks', 'Real-Time Crime Centers (RTCCs) & camera registries', 'feeds', 'illustrative', null, 'Crime centers that pool camera feeds are one place plate reads can be viewed together.'],
+  [1, 'Real-Time Crime Centers (RTCCs) & camera registries', 'feeds', 'illustrative', null, 'Camera registries catalog public and private cameras for police access.'],
+  [15, 'Scraped web-scale facial recognition', 'extends', 'illustrative', null, 'Face recognition run against images collected from the open web.'],
+  [150, 'Scraped web-scale facial recognition', 'feeds', 'illustrative', null, 'Public social-media photos are one possible source of scraped images.'],
+  [62, 'Proof-of-personhood iris biometric orbs', 'extends', 'illustrative', null, 'Iris capture used to prove a unique person rather than a named identity.'],
+  [199, 'Connected-car data broker feeds', 'feeds', 'illustrative', null, 'Vehicle telematics are the data such feeds would carry.'],
+  ['Connected-car data broker feeds', 170, 'feeds', 'illustrative', null, 'The feed’s destination is the broker market.'],
+  [203, 'In-car infotainment forensics', 'feeds', 'illustrative', null, 'Forensic tools extract the history infotainment systems store.'],
+  [87, 'Mobile device forensic extraction (UFED)', 'feeds', 'illustrative', null, 'Messages stored on a handset are among the data extraction recovers.'],
+  [135, 'Dark-web & breach-credential aggregators', 'feeds', 'illustrative', null, 'Breached credentials are what these aggregators collect.'],
+  [157, 'Card-linked offers & offline purchase attribution', 'feeds', 'illustrative', null, 'Card transactions are matched to offers and ad exposure.'],
+  ['Card-linked offers & offline purchase attribution', 118, 'feeds', 'illustrative', null, 'Attribution measures whether targeted ads led to in-store purchases.'],
+  [159, 'Retail return-fraud & ban databases', 'feeds', 'illustrative', null, 'Return transactions at the register feed fraud and ban lists.'],
+  [172, 'Automated tenant & eviction screening databases', 'extends', 'illustrative', null, 'Tenant screening is a specialized background check.'],
+  [215, 'Non-intrusive appliance load monitoring (NILM)', 'feeds', 'illustrative', null, 'NILM disaggregates a household’s load curve into individual appliances.'],
+  [194, 'Campus Wi-Fi attendance & movement tracking', 'feeds', 'illustrative', null, 'Access-point association logs show which building a device is in.'],
+  [261, 'School-issued device & self-harm scanning', 'combines', 'illustrative', null, 'Both monitor students through school-provided platforms and devices.'],
+  [256, 'Sociometric employee badges', 'extends', 'illustrative', null, 'Badges that add sensors to location tracking.'],
+  [198, 'Long-haul trucker ELD & fatigue telemetry', 'extends', 'illustrative', null, 'Logging devices add hours-of-service and fatigue data to fleet telematics.'],
+  [257, 'Ultrasonic / Haptic warehouse wristbands', 'extends', 'illustrative', null, 'Wearables that track worker hands and tasks beyond scanner events.'],
+  [33, 'Drone Remote ID broadcasting', 'combines', 'illustrative', null, 'Remote ID makes the drones themselves observable to receivers.'],
+  [270, 'Submarine fiber-optic cable taps', 'combines', 'illustrative', null, 'Both collect communications as they cross network infrastructure.'],
+  [192, 'Wi-Fi CSI (Channel State Information) sensing', 'combines', 'illustrative', null, 'Both read Wi‑Fi radio signals, CSI to sense motion rather than identifiers.'],
+  [251, 'OS-level screen-capture & recall indexing', 'combines', 'illustrative', null, 'Both capture what appears on a screen; recall indexing does it on the user’s own device.'],
+  [139, 'Client-side scanning (CSS)', 'combines', 'illustrative', null, 'Both scan message content, client-side scanning on the device before encryption.'],
 ];

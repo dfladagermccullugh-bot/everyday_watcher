@@ -1,0 +1,327 @@
+The medium,Its purpose,The year of implementation
+Fixed public CCTV,"Record visual observations of people, vehicles, locations, and events for monitoring or later review.",1968
+Private-business CCTV,"Record visual observations of people, vehicles, locations, and events for monitoring or later review.",1949
+Residential security cameras,"Record visual observations of people, vehicles, locations, and events for monitoring or later review.",1966
+Video doorbell cameras,"Record visual observations of people, vehicles, locations, and events for monitoring or later review.",2013
+Police dash cameras,"Record visual observations of people, vehicles, locations, and events for monitoring or later review.",1987
+Police body-worn cameras,"Record visual observations of people, vehicles, locations, and events for monitoring or later review.",2005
+Traffic cameras,"Record visual observations of people, vehicles, locations, and events for monitoring or later review.",1959
+Red-light cameras,"Record visual observations of people, vehicles, locations, and events for monitoring or later review.",1965
+Speed cameras,"Record visual observations of people, vehicles, locations, and events for monitoring or later review.",1958
+ANPR/ALPR,Identify vehicles and record license plates with associated locations and times.,1979
+Parking plate recognition,Identify vehicles and record license plates with associated locations and times.,1998
+Toll plate recognition,Identify vehicles and record license plates with associated locations and times.,1997
+Mobile municipal ALPR scanning fleets,Identify vehicles and record license plates with associated locations and times.,2009
+Fixed neighborhood ALPR networks,Identify vehicles and record license plates with associated locations and times.,2017
+CCTV video analytics,"Record visual observations of people, vehicles, locations, and events for monitoring or later review.",1998
+Multi-camera trajectory reconstruction,"Record visual observations of people, vehicles, locations, and events for monitoring or later review.",1997
+Facial recognition,"Detect, compare, or group faces to support identification and cross-image matching.",1993
+Live facial recognition,"Detect, compare, or group faces to support identification and cross-image matching.",1998
+Face watchlists,"Detect, compare, or group faces to support identification and cross-image matching.",1998
+Social-network facial recognition,"Detect, compare, or group faces to support identification and cross-image matching.",2010
+Photo face clustering,"Detect, compare, or group faces to support identification and cross-image matching.",2008
+Scraped web-scale facial recognition,"Detect, compare, or group faces to support identification and cross-image matching.",2017
+Reverse image search,"Record visual observations of people, vehicles, locations, and events for monitoring or later review.",2008
+Perceptual image matching,Extract identifying or behavioral features from visual observations.,2009
+Gait recognition,Extract identifying or behavioral features from visual observations.,1994
+Pose estimation,Extract identifying or behavioral features from visual observations.,2000
+Body-shape analysis,Extract identifying or behavioral features from visual observations.,1998
+Thermal imaging,Measure physical characteristics or objects using imaging and sensing.,1965
+Temperature screening,Measure physical characteristics or objects using imaging and sensing.,2003
+Depth cameras,Measure physical characteristics or objects using imaging and sensing.,1997
+LiDAR sensing,Measure physical characteristics or objects using imaging and sensing.,1961
+Millimeter-wave body scanners,Measure physical characteristics or objects using imaging and sensing.,2007
+Backscatter body scanners,Measure physical characteristics or objects using imaging and sensing.,1991
+Aerial photography,"Observe and record places, infrastructure, vehicles, or movement from elevated or remote imagery.",1858
+Helicopter surveillance,"Observe and record places, infrastructure, vehicles, or movement from elevated or remote imagery.",1966
+Drone surveillance,"Observe and record places, infrastructure, vehicles, or movement from elevated or remote imagery.",1995
+Persistent wide-area aerial surveillance,"Observe and record places, infrastructure, vehicles, or movement from elevated or remote imagery.",2006
+Satellite remote sensing,"Observe and record places, infrastructure, vehicles, or movement from elevated or remote imagery.",1960
+Commercial high-resolution satellite imaging,"Observe and record places, infrastructure, vehicles, or movement from elevated or remote imagery.",1999
+Street-level panoramic imagery,"Observe and record places, infrastructure, vehicles, or movement from elevated or remote imagery.",2007
+In-vehicle cameras,Observe vehicle occupants and driving behavior.,1998
+Driver monitoring systems,Observe vehicle occupants and driving behavior.,2006
+Retail shelf cameras,"Track shopping activity, inventory interaction, and customer movement using cameras.",2003
+Cashierless computer vision,"Track shopping activity, inventory interaction, and customer movement using cameras.",2016
+Wiretaps,"Capture, retain, or analyze sound and communications for monitoring, identification, or event detection.",1895
+Call-content interception,"Capture, retain, or analyze sound and communications for monitoring, identification, or event detection.",1895
+Call recording,"Capture, retain, or analyze sound and communications for monitoring, identification, or event detection.",1930
+Voicemail,"Capture, retain, or analyze sound and communications for monitoring, identification, or event detection.",1979
+Gunshot detection,"Capture, retain, or analyze sound and communications for monitoring, identification, or event detection.",1996
+Public microphone networks,"Capture, retain, or analyze sound and communications for monitoring, identification, or event detection.",2004
+Voice assistants,"Capture, retain, or analyze sound and communications for monitoring, identification, or event detection.",2011
+Smart speakers,Analyze recorded speech or acoustic characteristics to identify speakers or infer behavior.,2014
+Smart-TV microphones,"Capture, retain, or analyze sound and communications for monitoring, identification, or event detection.",2012
+Automatic content recognition (ACR),Analyze recorded speech or acoustic characteristics to identify speakers or infer behavior.,2011
+Voiceprints,Analyze recorded speech or acoustic characteristics to identify speakers or infer behavior.,1962
+Speaker recognition,Analyze recorded speech or acoustic characteristics to identify speakers or infer behavior.,1976
+Speech sentiment analysis,Analyze recorded speech or acoustic characteristics to identify speakers or infer behavior.,2001
+Speech emotion analysis,Analyze recorded speech or acoustic characteristics to identify speakers or infer behavior.,1996
+Ultrasonic device linkage,Associate nearby devices using audio signals or shared ambient sound.,2013
+Ambient-audio device linkage,Associate nearby devices using audio signals or shared ambient sound.,2014
+Fingerprint databases,Capture or compare biological and behavioral traits to verify identity or match records.,1891
+AFIS,Capture or compare biological and behavioral traits to verify identity or match records.,1974
+IAFIS,Capture or compare biological and behavioral traits to verify identity or match records.,1999
+NGI,Capture or compare biological and behavioral traits to verify identity or match records.,2011
+Iris recognition,Capture or compare biological and behavioral traits to verify identity or match records.,1994
+Retina recognition,Capture or compare biological and behavioral traits to verify identity or match records.,1984
+Palm biometrics,Capture or compare biological and behavioral traits to verify identity or match records.,1994
+Hand geometry,Capture or compare biological and behavioral traits to verify identity or match records.,1971
+Vascular/vein biometrics,Capture or compare biological and behavioral traits to verify identity or match records.,1997
+Keystroke dynamics,Capture or compare biological and behavioral traits to verify identity or match records.,1980
+Mouse dynamics,Capture or compare biological and behavioral traits to verify identity or match records.,2003
+Touch-gesture biometrics,Capture or compare biological and behavioral traits to verify identity or match records.,2012
+Eye tracking,"Measure physiological signals or gaze for identification, health, or behavioral inference.",1901
+Pupil tracking,"Measure physiological signals or gaze for identification, health, or behavioral inference.",1960
+Heart-rate sensing,"Measure physiological signals or gaze for identification, health, or behavioral inference.",1977
+ECG sensing,"Measure physiological signals or gaze for identification, health, or behavioral inference.",1903
+Consumer neurotechnology / EEG wearables,"Measure physiological signals or gaze for identification, health, or behavioral inference.",2009
+Face-based emotion inference,Capture or compare biological and behavioral traits to verify identity or match records.,2009
+Border biometric screening,Capture or compare biological and behavioral traits to verify identity or match records.,1993
+Airport biometric screening,Capture or compare biological and behavioral traits to verify identity or match records.,2001
+Biometric e-gates,Capture or compare biological and behavioral traits to verify identity or match records.,2004
+Biometric passports,Capture or compare biological and behavioral traits to verify identity or match records.,2004
+Face-based boarding,Capture or compare biological and behavioral traits to verify identity or match records.,2017
+Proof-of-personhood iris biometric orbs,Capture or compare biological and behavioral traits to verify identity or match records.,2021
+CODIS,Store or compare genetic profiles to establish identity or biological relationships.,1990
+NDIS,Store or compare genetic profiles to establish identity or biological relationships.,1998
+Direct-to-consumer DNA testing,Store or compare genetic profiles to establish identity or biological relationships.,2007
+Genetic genealogy,Store or compare genetic profiles to establish identity or biological relationships.,2018
+Call detail records,"Retain subscriber, device, communication, or signaling records for network operation and tracking.",1951
+SMS metadata,"Retain subscriber, device, communication, or signaling records for network operation and tracking.",1992
+MMS metadata,"Retain subscriber, device, communication, or signaling records for network operation and tracking.",2002
+Retained SMS/MMS content,"Retain subscriber, device, communication, or signaling records for network operation and tracking.",1992
+Cell-site location information (CSLI),Infer or record device and subscriber location from wireless networks or positioning systems.,1983
+Cell-tower triangulation,Infer or record device and subscriber location from wireless networks or positioning systems.,1983
+Cellular network positioning,Infer or record device and subscriber location from wireless networks or positioning systems.,1996
+Wireless E911 location,Infer or record device and subscriber location from wireless networks or positioning systems.,1996
+Handset GPS,Infer or record device and subscriber location from wireless networks or positioning systems.,1999
+Assisted GPS (A-GPS),Infer or record device and subscriber location from wireless networks or positioning systems.,2001
+Carrier location services,Infer or record device and subscriber location from wireless networks or positioning systems.,2001
+Location history services,Infer or record device and subscriber location from wireless networks or positioning systems.,2009
+Location-data brokers,Infer or record device and subscriber location from wireless networks or positioning systems.,2010
+IMSI catchers,Identify or interact with nearby mobile devices by emulating cellular infrastructure.,1993
+Cell-site simulators,Infer or record device and subscriber location from wireless networks or positioning systems.,1995
+SIM registries,"Retain subscriber, device, communication, or signaling records for network operation and tracking.",1991
+IMEI registries,"Retain subscriber, device, communication, or signaling records for network operation and tracking.",1992
+Subscriber registries,"Retain subscriber, device, communication, or signaling records for network operation and tracking.",1973
+SS7 signaling records,"Retain subscriber, device, communication, or signaling records for network operation and tracking.",1975
+Roaming records,Infer or record device and subscriber location from wireless networks or positioning systems.,1991
+5G location records,Infer or record device and subscriber location from wireless networks or positioning systems.,2019
+Web-server logs,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1991
+Browser history logs,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1993
+ISP connection logs,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1994
+DNS query logs,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1983
+Deep packet inspection,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1999
+Enterprise proxy logs,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1994
+VPN logs,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1996
+TLS interception,"Log and analyze online activity, device interactions, network traffic, or account behavior.",2006
+HTTP cookies,"Track user activity across sites or apps for analytics, attribution, and advertising.",1994
+Third-party cookies,"Track user activity across sites or apps for analytics, attribution, and advertising.",1995
+Tracking pixels,"Track user activity across sites or apps for analytics, attribution, and advertising.",1999
+Third-party web trackers,"Track user activity across sites or apps for analytics, attribution, and advertising.",1996
+Advertising networks,"Track user activity across sites or apps for analytics, attribution, and advertising.",1995
+Targeted advertising,"Track user activity across sites or apps for analytics, attribution, and advertising.",1995
+Real-time bidding,"Track user activity across sites or apps for analytics, attribution, and advertising.",2009
+Browser fingerprinting,Derive a persistent device or browser signature for identification across visits.,2010
+Device fingerprinting,Derive a persistent device or browser signature for identification across visits.,2004
+Canvas fingerprinting,Derive a persistent device or browser signature for identification across visits.,2012
+WebGL fingerprinting,Derive a persistent device or browser signature for identification across visits.,2013
+Font fingerprinting,Derive a persistent device or browser signature for identification across visits.,2010
+Audio fingerprinting,Derive a persistent device or browser signature for identification across visits.,2016
+Mobile advertising IDs,"Track user activity across sites or apps for analytics, attribution, and advertising.",2012
+App analytics/advertising SDKs,"Track user activity across sites or apps for analytics, attribution, and advertising.",2008
+App permission and sensor access,"Log and analyze online activity, device interactions, network traffic, or account behavior.",2008
+Search histories,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1990
+Clickstream and engagement logs,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1993
+Session replay,"Log and analyze online activity, device interactions, network traffic, or account behavior.",2006
+Fine-grained web interaction logs,"Log and analyze online activity, device interactions, network traffic, or account behavior.",2005
+Browser autofill stores,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1999
+Password-manager stores,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1997
+Password breach databases,"Log and analyze online activity, device interactions, network traffic, or account behavior.",2007
+Password reuse databases,"Log and analyze online activity, device interactions, network traffic, or account behavior.",2010
+Browser-extension collection,"Log and analyze online activity, device interactions, network traffic, or account behavior.",2004
+Printer steganography (Machine Identification Codes),Embed invisible tracking matrices on printed documents encoding device serial numbers and timestamps.,1985
+Out-of-band CPU management engines,"Log and analyze online activity, device interactions, network traffic, or account behavior.",2006
+UEFI / BIOS persistence implants,"Log and analyze online activity, device interactions, network traffic, or account behavior.",2009
+Email metadata,"Store or inspect digital communications, access events, account activity, or synchronized data.",1971
+Email content scanning,"Store or inspect digital communications, access events, account activity, or synchronized data.",1998
+Client-side scanning (CSS),"Store or inspect digital communications, access events, account activity, or synchronized data.",2021
+OS-level screen-capture & recall indexing,"Store or inspect digital communications, access events, account activity, or synchronized data.",2024
+Spam filtering,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1996
+Cloud backups,"Store or inspect digital communications, access events, account activity, or synchronized data.",2006
+Cloud synchronization,"Store or inspect digital communications, access events, account activity, or synchronized data.",2007
+Cloud audit logs,"Store or inspect digital communications, access events, account activity, or synchronized data.",2013
+CDN access logs,"Store or inspect digital communications, access events, account activity, or synchronized data.",1998
+Object-access logs,"Store or inspect digital communications, access events, account activity, or synchronized data.",2006
+Authentication logs,"Store or inspect digital communications, access events, account activity, or synchronized data.",1988
+SSO logs,"Store or inspect digital communications, access events, account activity, or synchronized data.",1997
+Bot-detection telemetry,"Log and analyze online activity, device interactions, network traffic, or account behavior.",2007
+Fraud-detection telemetry,"Log and analyze online activity, device interactions, network traffic, or account behavior.",2001
+Social-media activity and geotag logs,"Record content consumption, social activity, or embedded media metadata.",2004
+Social-media scraping and sentiment analysis,"Record content consumption, social activity, or embedded media metadata.",2006
+EXIF metadata,"Record content consumption, social activity, or embedded media metadata.",1995
+Photo GPS metadata,"Record content consumption, social activity, or embedded media metadata.",2001
+C2PA cryptographic content provenance,"Record content consumption, social activity, or embedded media metadata.",2021
+Streaming viewing logs,"Record content consumption, social activity, or embedded media metadata.",2007
+Set-top-box viewing logs,"Log and analyze online activity, device interactions, network traffic, or account behavior.",1998
+Smart-TV viewing logs,"Record content consumption, social activity, or embedded media metadata.",2011
+Card transaction records,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",1950
+ATM transaction/camera records,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",1967
+Point-of-sale records,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",1973
+Loyalty-program histories,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",1981
+E-commerce history,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",1994
+Digital receipts,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",2005
+Card-linked offers & offline purchase attribution,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",2012
+AML transaction monitoring,"Assess identity, financial activity, eligibility, or risk using retained personal records.",1990
+KYC identity records,"Assess identity, financial activity, eligibility, or risk using retained personal records.",2001
+Financial fraud monitoring,"Assess identity, financial activity, eligibility, or risk using retained personal records.",1992
+Retail return-fraud & ban databases,"Assess identity, financial activity, eligibility, or risk using retained personal records.",2004
+Credit bureau files,"Assess identity, financial activity, eligibility, or risk using retained personal records.",1899
+Credit scoring,"Assess identity, financial activity, eligibility, or risk using retained personal records.",1956
+Insurance claims records,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",1890
+Usage-based insurance telematics,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",1998
+Data brokers,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",1970
+People-search services,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",1996
+Background-check services,"Assess identity, financial activity, eligibility, or risk using retained personal records.",1998
+Automated tenant & eviction screening databases,"Assess identity, financial activity, eligibility, or risk using retained personal records.",1998
+Digitized public records,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",1994
+DMV photo databases,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",1985
+Driver identity records,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",1903
+Postal mail imaging,Identify items and log their movement through commercial or delivery systems.,2001
+Package barcode scans,Identify items and log their movement through commercial or delivery systems.,1982
+RFID inventory tracking,Identify items and log their movement through commercial or delivery systems.,1999
+Electronic article surveillance/RFID anti-theft tags,Identify items and log their movement through commercial or delivery systems.,1966
+NFC checkout,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",2011
+Biometric checkout,"Record transactions, purchases, customer identity, or commercial interactions for operations and profiling.",2015
+RFID access cards,"Record vehicle position, operation, diagnostics, or occupant interactions.",1983
+Electronic keys and badges,"Record access, movement, location, or activity through connected transport and identification systems.",1975
+Transit smart cards,"Record vehicle position, operation, diagnostics, or occupant interactions.",1997
+Electronic toll transponders,"Record access, movement, location, or activity through connected transport and identification systems.",1989
+Bluetooth Classic telemetry,Detect nearby devices or estimate proximity and movement from wireless signals.,1999
+Bluetooth Low Energy (BLE),Detect nearby devices or estimate proximity and movement from wireless signals.,2010
+Bluetooth beacons,Detect nearby devices or estimate proximity and movement from wireless signals.,2013
+Bluetooth retail tracking,Detect nearby devices or estimate proximity and movement from wireless signals.,2014
+Bluetooth item trackers,Detect nearby devices or estimate proximity and movement from wireless signals.,2012
+Crowdsourced finding networks,"Record access, movement, location, or activity through connected transport and identification systems.",2019
+Wi-Fi probe-request tracking,Detect nearby devices or estimate proximity and movement from wireless signals.,2012
+Wi-Fi MAC-address tracking,Detect nearby devices or estimate proximity and movement from wireless signals.,2013
+Wi-Fi association logs,Detect nearby devices or estimate proximity and movement from wireless signals.,1999
+Wi-Fi positioning databases,Detect nearby devices or estimate proximity and movement from wireless signals.,2003
+Wi-Fi CSI (Channel State Information) sensing,Detect nearby devices or estimate proximity and movement from wireless signals.,2013
+Ultra-wideband ranging,Detect nearby devices or estimate proximity and movement from wireless signals.,2019
+Passive radar / Ambient backscatter sensing,Detect nearby devices or estimate proximity and movement from wireless signals.,1998
+TEMPEST / Electromagnetic emanation interception,Detect nearby devices or estimate proximity and movement from wireless signals.,1985
+Fleet GPS tracking,"Record vehicle position, operation, diagnostics, or occupant interactions.",1996
+Fleet vehicle telematics,"Record vehicle position, operation, diagnostics, or occupant interactions.",2001
+Connected-car telematics services,"Record vehicle position, operation, diagnostics, or occupant interactions.",1996
+Connected-car data broker feeds,"Record vehicle position, operation, diagnostics, or occupant interactions.",2015
+Vehicle event data recorders,"Record vehicle position, operation, diagnostics, or occupant interactions.",1994
+OBD-II telemetry,"Record vehicle position, operation, diagnostics, or occupant interactions.",1996
+Plug-in GPS/cellular vehicle dongles,"Record vehicle position, operation, diagnostics, or occupant interactions.",2008
+Infotainment history,"Record vehicle position, operation, diagnostics, or occupant interactions.",2001
+Navigation and paired-device history,"Record vehicle position, operation, diagnostics, or occupant interactions.",2004
+In-car infotainment forensics,"Record vehicle position, operation, diagnostics, or occupant interactions.",2013
+Ride-hailing telemetry,"Record access, movement, location, or activity through connected transport and identification systems.",2009
+Delivery-app telemetry,"Record access, movement, location, or activity through connected transport and identification systems.",2011
+Micromobility telemetry,"Record access, movement, location, or activity through connected transport and identification systems.",2017
+Passenger Name Records (PNR),"Record travel identity, movement, or transport-system broadcasts.",1971
+Advance Passenger Information (API),"Record travel identity, movement, or transport-system broadcasts.",1989
+ADS-B broadcasts,"Record travel identity, movement, or transport-system broadcasts.",2004
+V2X broadcasts,"Record travel identity, movement, or transport-system broadcasts.",2017
+Drone Remote ID broadcasting,"Record travel identity, movement, or transport-system broadcasts.",2021
+Smart electricity meters,Record resource consumption over time and infer occupancy or activity patterns.,2006
+Smart gas meters,Record resource consumption over time and infer occupancy or activity patterns.,2008
+Smart water meters,Record resource consumption over time and infer occupancy or activity patterns.,2009
+Utility interval data,Record resource consumption over time and infer occupancy or activity patterns.,2006
+Non-intrusive appliance load monitoring (NILM),Record resource consumption over time and infer occupancy or activity patterns.,1985
+Smart thermostats,"Record activity, occupancy, device status, or spatial information in homes and buildings.",2011
+Home occupancy sensors,"Record activity, occupancy, device status, or spatial information in homes and buildings.",1990
+Smart locks,"Record activity, occupancy, device status, or spatial information in homes and buildings.",2013
+Home alarm systems,"Record activity, occupancy, device status, or spatial information in homes and buildings.",1970
+Baby monitors,"Record activity, occupancy, device status, or spatial information in homes and buildings.",1937
+Home security cameras,"Record activity, occupancy, device status, or spatial information in homes and buildings.",1990
+Robot-vacuum mapping,"Record activity, occupancy, device status, or spatial information in homes and buildings.",2015
+Smart-appliance telemetry,"Record activity, occupancy, device status, or spatial information in homes and buildings.",2013
+General IoT telemetry,"Record activity, occupancy, device status, or spatial information in homes and buildings.",2008
+Smart-city environmental sensors,Measure activity and conditions in public spaces for management and analysis.,2012
+Wastewater-based epidemiology,Measure activity and conditions in public spaces for management and analysis.,2001
+Traffic-flow sensors,Measure activity and conditions in public spaces for management and analysis.,1990
+Footfall sensors,Measure activity and conditions in public spaces for management and analysis.,2001
+Smart parking/streetlight sensors,Measure activity and conditions in public spaces for management and analysis.,2014
+Distributed Acoustic Sensing (DAS),Measure activity and conditions in public spaces for management and analysis.,2009
+Building occupancy systems,"Record activity, occupancy, device status, or spatial information in homes and buildings.",2005
+"Vape, smoke & acoustic restroom sensors","Record activity, occupancy, device status, or spatial information in homes and buildings.",2018
+Real-time location systems (RTLS),"Record activity, occupancy, device status, or spatial information in homes and buildings.",1998
+Electronic health records,"Store, transmit, or analyze patient, prescription, imaging, or care-delivery records.",1972
+E-prescribing records,"Store, transmit, or analyze patient, prescription, imaging, or care-delivery records.",2003
+Prescription drug monitoring programs,"Store, transmit, or analyze patient, prescription, imaging, or care-delivery records.",1939
+Health-insurance claims,"Store, transmit, or analyze patient, prescription, imaging, or care-delivery records.",1965
+Pharmacy records,"Store, transmit, or analyze patient, prescription, imaging, or care-delivery records.",1900
+Fitness trackers,Continuously or periodically record health and physiological measurements.,2009
+Smartwatches,Continuously or periodically record health and physiological measurements.,2015
+Fitness-app sharing,Continuously or periodically record health and physiological measurements.,2010
+Continuous glucose monitors,Continuously or periodically record health and physiological measurements.,1999
+Connected medical devices,Continuously or periodically record health and physiological measurements.,2008
+Implant telemetry,Continuously or periodically record health and physiological measurements.,2001
+Telehealth platforms,"Store, transmit, or analyze patient, prescription, imaging, or care-delivery records.",2000
+Period-tracking apps,"Store sensitive self-reported health, reproductive, or behavioral information.",2013
+Fertility apps,"Store sensitive self-reported health, reproductive, or behavioral information.",2013
+Mental-health apps,"Store sensitive self-reported health, reproductive, or behavioral information.",2010
+Medical imaging systems,"Store, transmit, or analyze patient, prescription, imaging, or care-delivery records.",1895
+PACS,"Store, transmit, or analyze patient, prescription, imaging, or care-delivery records.",1982
+Work email monitoring,"Monitor employee communications, device use, movement, or productivity.",1995
+Work communications monitoring,"Monitor employee communications, device use, movement, or productivity.",2000
+Keystroke and mouse monitoring,"Monitor employee communications, device use, movement, or productivity.",1998
+Screen and webcam monitoring,"Monitor employee communications, device use, movement, or productivity.",2001
+Productivity scores,"Monitor employee communications, device use, movement, or productivity.",2014
+Endpoint monitoring,"Monitor employee communications, device use, movement, or productivity.",2005
+Data-loss-prevention (DLP) monitoring,"Monitor employee communications, device use, movement, or productivity.",2006
+Employee GPS tracking,"Monitor employee communications, device use, movement, or productivity.",2006
+Long-haul trucker ELD & fatigue telemetry,"Monitor employee communications, device use, movement, or productivity.",2017
+Employee badge tracking,"Monitor employee communications, device use, movement, or productivity.",1990
+Sociometric employee badges,"Monitor employee communications, device use, movement, or productivity.",2008
+Warehouse scanner telemetry,"Monitor employee communications, device use, movement, or productivity.",1995
+Ultrasonic / Haptic warehouse wristbands,"Monitor employee communications, device use, movement, or productivity.",2016
+Call-center speech analytics,"Monitor employee communications, device use, movement, or productivity.",2003
+Remote exam proctoring,"Monitor student identity, attendance, coursework, or exam activity.",2008
+Learning-management-system analytics,"Monitor student identity, attendance, coursework, or exam activity.",2002
+Education platform analytics,"Monitor student identity, attendance, coursework, or exam activity.",2008
+School-issued device & self-harm scanning,"Monitor student identity, attendance, coursework, or exam activity.",2013
+RFID student IDs,"Monitor student identity, attendance, coursework, or exam activity.",2005
+Student access-card systems,"Monitor student identity, attendance, coursework, or exam activity.",1998
+Campus Wi-Fi attendance & movement tracking,"Monitor student identity, attendance, coursework, or exam activity.",2015
+FISA electronic surveillance,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",1978
+CALEA lawful-intercept capability,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",1994
+NSA post-9/11 bulk telephony metadata collection,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",2001
+Section 215 bulk telephony metadata program,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",2006
+PRISM provider collection,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",2007
+Section 702 provider collection,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",2008
+Section 702 upstream collection,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",2008
+Submarine fiber-optic cable taps,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",2001
+Fusion centers,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",2003
+Real-Time Crime Centers (RTCCs) & camera registries,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",2005
+Suspicious Activity Reporting systems,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",2008
+Gang databases,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",1988
+Government watchlists,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",2003
+Predictive policing,Analyze records to infer associations or assess potential criminal risk.,2011
+Algorithmic criminal-risk scores,Analyze records to infer associations or assess potential criminal risk.,1998
+Link analysis,Analyze records to infer associations or assess potential criminal risk.,1995
+AI stylometry & authorship attribution,Analyze records to infer associations or assess potential criminal risk.,2003
+Geofence warrants,Obtain records associated with locations or search activity through legal demands.,2016
+Reverse search demands,Obtain records associated with locations or search activity through legal demands.,2016
+Keyword search warrants/demands,Obtain records associated with locations or search activity through legal demands.,2017
+Mobile device forensic extraction (UFED),Obtain records associated with locations or search activity through legal demands.,2007
+Government social-media monitoring,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",2011
+Dark-web & breach-credential aggregators,"Collect, retain, share, or analyze information for government intelligence or law enforcement.",2014
+Identity graphs,"Combine and analyze records to infer identities, interests, movement, or anomalous behavior.",2014
+Location-derived audience segments,"Combine and analyze records to infer identities, interests, movement, or anomalous behavior.",2012
+Dwell-time analytics,"Infer presence, movement, visits, or patterns from aggregated observations.",2013
+Visitation analytics,"Infer presence, movement, visits, or patterns from aggregated observations.",2013
+Surveillance pricing,"Classify or score individuals and behavior for pricing, fraud, or risk decisions.",2015
+Fraud risk scores,"Classify or score individuals and behavior for pricing, fraud, or risk decisions.",2001
+Trust scores,"Classify or score individuals and behavior for pricing, fraud, or risk decisions.",2015
+Insider-risk scores,"Classify or score individuals and behavior for pricing, fraud, or risk decisions.",2016
+Anomaly detection,"Combine and analyze records to infer identities, interests, movement, or anomalous behavior.",2000
+Crowd-density analytics,"Infer presence, movement, visits, or patterns from aggregated observations.",2014
+Trajectory reconstruction,"Infer presence, movement, visits, or patterns from aggregated observations.",2015

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import { SIGNALS, quote, getEntry, type SignalId, type Entry, type SourceFile, type Scope, SCOPES } from '@/lib/data';
-import { sourceHref, sourceName, yearLabel } from '@/lib/format';
+import { sourceHref, sourceName, sourceUnit } from '@/lib/format';
 import { useOpenEntry } from '@/lib/url-state';
 import { useUI } from '@/lib/store';
 
@@ -40,17 +40,14 @@ export function ScopeLabel({ scope }: { scope: Scope }) {
 }
 
 export function YearBadge({ entry, className }: { entry: Entry; className?: string }) {
-  const none = !entry.year;
+  const differs = entry.reportDating && !entry.reportDating.agrees;
   return (
     <span
-      className={clsx(
-        'inline-flex items-center rounded-full border px-2 py-0.5 font-mono text-[0.6875rem] tabular leading-4',
-        none ? 'border-dashed border-line-2 text-paper-3' : 'border-line-2 text-paper-2',
-        className,
-      )}
-      title={none ? 'The CSV year for this row is not in the supplied files' : undefined}
+      className={clsx('inline-flex items-center gap-1 rounded-full border border-line-2 px-2 py-0.5 font-mono text-[0.6875rem] tabular leading-4 text-paper-2', className)}
+      title={differs ? `The report dates this ${entry.reportDating!.value}` : undefined}
     >
-      {none ? (entry.pos.kind === 'milestone' ? `milestone ${entry.pos.start}` : 'year n/a') : yearLabel(entry)}
+      {entry.year}
+      {differs && <span aria-label="Report dates this differently" className="text-sig-visual">*</span>}
     </span>
   );
 }
@@ -71,7 +68,7 @@ export function BasisBadge({ basis }: { basis: 'documented' | 'illustrative' }) 
 /** A numbered reference to a line in the supplied files, with the quoted line on hover. */
 export function SourceRef({ file = 'report', line, className }: { file?: SourceFile; line: number; className?: string }) {
   const q = quote(file, line);
-  const label = `${sourceName(file)} line ${line}`;
+  const label = `${sourceName(file)} ${sourceUnit(file)} ${line}`;
   const link = (
     <Link
       href={sourceHref(file, line)}
@@ -132,7 +129,7 @@ export function EntryPill({ id, scope, className, showYear }: { id: string; scop
           <span className="sr-only">({SCOPES[scope].label})</span>
         </span>
       )}
-      {showYear && <span className="font-mono text-[0.6875rem] text-paper-3 tabular">{e.year ?? '—'}</span>}
+      {showYear && <span className="font-mono text-[0.6875rem] text-paper-3 tabular">{e.year}</span>}
     </button>
   );
 }

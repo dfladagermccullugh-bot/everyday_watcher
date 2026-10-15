@@ -40,7 +40,7 @@ export function SensorField() {
 
   return (
     <div className="relative">
-      <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="h-auto w-full overflow-visible" role="group" aria-label="All 292 documented systems arranged in rings by signal type">
+      <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="h-auto w-full overflow-visible" role="group" aria-label={`All ${entries.length} documented systems arranged in rings by signal type`}>
         <defs>
           <radialGradient id="core" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#f2eee6" stopOpacity=".18" />

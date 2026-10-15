@@ -16,44 +16,38 @@ export type CategoryId =
   | 'cloud' | 'media' | 'retail' | 'finance' | 'brokers' | 'health' | 'work' | 'home' | 'inference';
 export type Actor = 'government' | 'commercial' | 'mixed';
 export type Scope = 'c' | 'k' | 'l';
-export type SourceFile = 'report' | 'data';
+export type SourceFile = 'report' | 'data' | 'sheet';
 
 export type Milestone = { year: number; kind: string; label: string; file: SourceFile; line: number };
-export type Position = {
-  kind: 'exact' | 'approx' | 'range' | 'pre' | 'staged' | 'milestone' | 'unknown' | 'none';
-  start?: number;
-  end?: number;
-  approx?: boolean;
-  label?: string;
-  stages?: { year: number; label: string }[];
-  milestoneKind?: string;
-  milestoneLabel?: string;
-  unknownInCsv?: boolean;
-};
+export type ReportDating = { value: string; file: SourceFile; line: number; note: string; agrees: boolean };
 export type Entry = {
   id: string;
+  /** Row order in the spreadsheet (1-based, header excluded). */
   n: number;
+  /** Report inventory number, or null for rows the report does not describe. */
+  ref: number | null;
   name: string;
+  /** Spreadsheet purpose, verbatim. */
   purpose: string;
-  purposeBasis: 'csv' | 'report';
-  year: string | null;
-  yearBasis: 'csv' | 'described' | 'none';
-  yearNote: string | null;
-  yearSource: { file: SourceFile; line: number } | null;
-  pos: Position;
-  sortYear: number;
+  /** Index of the spreadsheet purpose group. */
+  group: number;
+  /** Spreadsheet year, verbatim. */
+  year: string;
+  yearNum: number;
+  reportDating: ReportDating | null;
   category: CategoryId;
   signal: SignalId;
   actor: Actor;
-  line: number;
-  section: string;
+  /** Report paragraph line, or null when the report does not describe the row. */
+  line: number | null;
+  section: string | null;
   milestones: Milestone[];
   noteLines: number[];
   keys: string[];
   moments: { id: string; scope: Scope }[];
   flows: string[];
 };
-export type Relation = { source: string; target: string; type: string; basis: 'documented' | 'illustrative'; line: number; note: string };
+export type Relation = { source: string; target: string; type: string; basis: 'documented' | 'illustrative'; line: number | null; note: string };
 export type LinkKey = { id: string; label: string; line: number; members: string[]; text: string };
 export type Quote = { title: string | null; text: string; cites: string[] };
 export type Moment = { id: string; time: string; title: string; line: string; body: string; rows: { id: string; scope: Scope }[]; feature?: string };
@@ -70,7 +64,7 @@ export const timelineContext = timelineJson as {
 export const day = dayJson as Moment[];
 export const flows = flowsJson as Flow[];
 export const trip = tripJson as { row: number; id: string; where: string; visible: boolean }[];
-export const quotes = quotesJson as Record<SourceFile, Record<string, Quote>>;
+export const quotes = quotesJson as Record<'report' | 'data', Record<string, Quote>>;
 export const meta = metaJson;
 export const report = reportJson as { linkage: string[][]; executive: string[]; scope: string; limits: string; inference: string; pattern: string };
 
@@ -80,7 +74,8 @@ export const citationById = new Map(citations.map((c) => [c.id, c]));
 export const byId = new Map(entries.map((e) => [e.id, e]));
 export const keyById = new Map(linkKeys.map((k) => [k.id, k]));
 export const getEntry = (id: string | null | undefined) => (id ? byId.get(id) : undefined);
-export const quote = (file: SourceFile, line: number): Quote | undefined => quotes[file]?.[String(line)];
+export const quote = (file: SourceFile, line: number | null): Quote | undefined =>
+  file === 'sheet' || line == null ? undefined : quotes[file]?.[String(line)];
 
 export const SIGNALS: Record<SignalId, { label: string; color: string; hint: string }> = {
   visual: { label: 'Visual', color: '#E8A951', hint: 'Faces, plates, bodies, rooms, imagery' },
@@ -136,5 +131,11 @@ export function relationsFor(id: string) {
   return relations.filter((r) => r.source === id || r.target === id);
 }
 export function siblingsOf(e: Entry) {
-  return entries.filter((x) => x.line === e.line && x.id !== e.id);
+  return e.line == null ? [] : entries.filter((x) => x.line === e.line && x.id !== e.id);
 }
+/** Rows that share the spreadsheet's purpose wording. */
+export function groupOf(e: Entry) {
+  return entries.filter((x) => x.group === e.group && x.id !== e.id);
+}
+/** Spreadsheet row number as it appears in Excel (header is row 1). */
+export const sheetRow = (e: Entry) => e.n + 1;

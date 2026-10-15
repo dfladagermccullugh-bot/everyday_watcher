@@ -12,7 +12,7 @@ const serif = Instrument_Serif({ subsets: ['latin'], weight: '400', style: ['nor
 const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-plex-mono', display: 'swap' });
 
 const description =
-  'An interactive atlas of 292 surveillance and data-collection systems: how much of an ordinary day is observed, recorded, analyzed, inferred, or stored, and how we got here.';
+  'An interactive atlas of 326 surveillance and data-collection systems: how much of an ordinary day is observed, recorded, analyzed, inferred, or stored, and how we got here.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://invisible-infrastructure.netlify.app'),

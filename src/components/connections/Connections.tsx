@@ -204,6 +204,7 @@ function NodeView({ id, onSelect }: { id: string; onSelect: (id: string) => void
       </p>
       <h2 className="mt-3 font-serif text-[2.2rem] leading-[1.02]">{e.name}</h2>
       <p className="mt-3 text-sm leading-relaxed text-paper-2">{e.purpose}</p>
+      {!e.line && <p className="mt-2 text-xs leading-relaxed text-paper-3">Added in the spreadsheet; not described in the report. Its connections are illustrative.</p>}
       <button type="button" onClick={() => set({ entry: e.id })} className="mt-4 inline-flex min-h-9 items-center rounded-full bg-paper px-4 text-sm font-medium text-ink">
         Open full entry
       </button>
@@ -222,7 +223,7 @@ function NodeView({ id, onSelect }: { id: string; onSelect: (id: string) => void
                     <Row id={other} onSelect={onSelect} sub={<>{r.source === id ? '→ ' : '← '}{r.note}</>} />
                     <div className="flex items-center gap-2 px-3 pb-2 pl-8">
                       <BasisBadge basis={r.basis} />
-                      <SourceRef line={r.line} />
+                      {r.line ? <SourceRef line={r.line} /> : <span className="font-mono text-[0.6875rem] text-paper-3">Not stated in the report</span>}
                     </div>
                   </li>
                 );

@@ -97,49 +97,56 @@ export function ReaderDiagram() {
 
 /* ------------------------------------------------ 2. Road and vehicle history */
 
-const HISTORY = ['anpr-alpr', 'traffic-cameras', 'red-light-cameras', 'speed-cameras', 'vehicle-event-data-recorders', 'parking-plate-recognition', 'toll-plate-recognition', 'cctv-video-analytics', 'multi-camera-trajectory-reconstruction', 'electronic-toll-transponders', 'connected-car-telematics-services', 'location-data-brokers'];
-const H0 = 1965;
+const HISTORY = [
+  'speed-cameras', 'traffic-cameras', 'red-light-cameras', 'anpr-alpr', 'electronic-toll-transponders', 'vehicle-event-data-recorders',
+  'connected-car-telematics-services', 'toll-plate-recognition', 'multi-camera-trajectory-reconstruction', 'parking-plate-recognition',
+  'cctv-video-analytics', 'real-time-crime-centers-rtccs-and-camera-registries', 'mobile-municipal-alpr-scanning-fleets', 'location-data-brokers',
+  'connected-car-data-broker-feeds', 'fixed-neighborhood-alpr-networks',
+];
+const PLATE_IDS = ['anpr-alpr', 'mobile-municipal-alpr-scanning-fleets', 'fixed-neighborhood-alpr-networks'];
+const H0 = 1950;
 const H1 = 2026;
+const pos = (y: number) => ((y - H0) / (H1 - H0)) * 100;
 
+/** Each bar runs from the spreadsheet year to today: a system does not end at its start date. */
 export function RoadHistory() {
   const open = useOpenEntry();
+  const list = HISTORY.map((id) => getEntry(id)).filter((e): e is NonNullable<typeof e> => !!e).sort((a, b) => a.yearNum - b.yearNum);
   return (
     <div className="rounded-3xl border border-line">
-      <div className="hidden grid-cols-[minmax(12rem,16rem)_1fr_8rem] gap-4 border-b border-line px-5 py-3 text-[0.6875rem] uppercase tracking-[0.12em] text-paper-3 md:grid">
+      <div className="hidden grid-cols-[minmax(12rem,18rem)_1fr_4rem] gap-4 border-b border-line px-5 py-3 text-[0.6875rem] uppercase tracking-[0.12em] text-paper-3 md:grid">
         <span>System</span>
         <span className="relative font-mono normal-case tracking-normal">
-          {[1970, 1980, 1990, 2000, 2010, 2020].map((y) => (
-            <span key={y} className="absolute -translate-x-1/2" style={{ left: `${((y - H0) / (H1 - H0)) * 100}%` }}>
+          {[1960, 1980, 2000, 2020].map((y) => (
+            <span key={y} className="absolute -translate-x-1/2" style={{ left: `${pos(y)}%` }}>
               {y}
             </span>
           ))}
           &nbsp;
         </span>
-        <span className="text-right">CSV year</span>
+        <span className="text-right">Year</span>
       </div>
       <ul>
-        {HISTORY.map((id) => {
-          const e = getEntry(id);
-          if (!e) return null;
-          const p = e.pos;
-          const has = p.start != null && p.kind !== 'pre';
-          const left = has ? ((p.start! - H0) / (H1 - H0)) * 100 : 0;
-          const width = has ? Math.max(1.4, (((p.end ?? p.start!) + (p.kind === 'range' ? 1 : 0) - p.start!) / (H1 - H0)) * 100) : 0;
+        {list.map((e) => {
+          const plate = PLATE_IDS.includes(e.id);
           return (
-            <li key={id} className="border-b border-line last:border-0">
-              <button type="button" onClick={() => open(id)} className="grid w-full gap-2 px-5 py-3.5 text-left hover:bg-ink-2 md:grid-cols-[minmax(12rem,16rem)_1fr_8rem] md:items-center md:gap-4">
-                <span className={clsx('text-sm', id === 'anpr-alpr' ? 'font-medium text-paper' : 'text-paper-2')}>{e.name}</span>
-                <span className="relative h-3 rounded-full bg-ink-3">
-                  {has ? (
-                    <span
-                      className={clsx('absolute top-0 h-3 rounded-full', p.kind === 'range' ? 'opacity-60' : '', p.kind === 'milestone' && 'border border-dashed bg-transparent')}
-                      style={{ left: `${left}%`, width: `${width}%`, background: p.kind === 'milestone' ? undefined : SIGNALS[e.signal].color, borderColor: SIGNALS[e.signal].color }}
-                    />
-                  ) : (
-                    <span className="absolute inset-0 grid place-items-center font-mono text-[0.625rem] text-paper-3">no date in supplied files</span>
-                  )}
+            <li key={e.id} className="border-b border-line last:border-0">
+              <button type="button" onClick={() => open(e.id)} className="grid w-full gap-2 px-5 py-3 text-left hover:bg-ink-2 md:grid-cols-[minmax(12rem,18rem)_1fr_4rem] md:items-center md:gap-4">
+                <span className={clsx('text-sm', plate ? 'font-medium text-paper' : 'text-paper-2')}>
+                  {e.name}
+                  {!e.line && <span className="ml-2 font-mono text-[0.625rem] text-paper-3">spreadsheet only</span>}
                 </span>
-                <span className={clsx('font-mono text-xs tabular md:text-right', e.year ? 'text-paper-2' : 'text-paper-3')}>{e.year ?? 'not supplied'}</span>
+                <span className="relative h-2.5 rounded-full bg-ink-3">
+                  <span
+                    className="absolute top-0 h-2.5 rounded-full"
+                    style={{
+                      left: `${pos(e.yearNum)}%`,
+                      right: 0,
+                      background: `linear-gradient(to right, ${SIGNALS[e.signal].color}, ${SIGNALS[e.signal].color}${plate ? '88' : '33'})`,
+                    }}
+                  />
+                </span>
+                <span className="font-mono text-xs text-paper-2 tabular md:text-right">{e.year}</span>
               </button>
             </li>
           );

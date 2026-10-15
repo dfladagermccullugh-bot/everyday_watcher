@@ -37,6 +37,7 @@
     "@types/react-dom": "^19.3.0",
     "graphology-types": "^0.24.8",
     "postcss": "^8.5.30",
+    "read-excel-file": "^9.3.12",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3"
   }

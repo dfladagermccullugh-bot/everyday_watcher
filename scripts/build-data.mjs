@@ -1,19 +1,19 @@
-// Builds the normalized dataset from the supplied research files.
+// Builds the normalized dataset.
 //
 // Inputs (never modified):
-//   research/deep-research-report.md       the research report
-//   research/dataset-reconstruction.md     the 292-row inventory, sample rows, and date notes
-//   data/surveillance_media.csv            OPTIONAL original three-column CSV. When present,
-//                                          its purpose and year values replace reconstructed ones.
+//   research/surveillance_media.xlsx       SOURCE OF TRUTH: medium, purpose, year (one row per system)
+//   research/deep-research-report.md       the research report: context, citations, relationships
+//   research/dataset-reconstruction.md     row-to-report-paragraph map and date notes
 // Outputs:
-//   src/data/generated/*.json               app data
-//   data/surveillance_media.reconstructed.csv   three-column CSV assembled from the inputs
+//   src/data/generated/*.json              app data
+//   data/surveillance_media.csv            plain three-column export of the spreadsheet
 
 import fs from 'node:fs';
 import path from 'node:path';
 import Graph from 'graphology';
 import forceAtlas2 from 'graphology-layout-forceatlas2';
-import { ROWS, DESCRIBED_YEARS, MILESTONES, CONTEXT_EVENTS, ERAS, DATE_NOTES, KEYS } from './enrichment.mjs';
+import readXlsxFile from 'read-excel-file/node';
+import { ROWS, NEW_ROWS, DESCRIBED_YEARS, MILESTONES, CONTEXT_EVENTS, ERAS, DATE_NOTES, KEYS } from './enrichment.mjs';
 import { RELATIONS } from './relations.mjs';
 import { DAY, FLOWS, TRIP } from './stories.mjs';
 
@@ -123,154 +123,99 @@ const paragraph = (line) => {
   };
 };
 
-// ---------- inventory ----------
-const inventory = [];
+// ---------- source of truth: the spreadsheet ----------
+const sheet = (await readXlsxFile(path.join(root, 'research/surveillance_media.xlsx')))[0].data;
+const [header, ...sheetRows] = sheet.filter((r) => r.some((c) => c != null && String(c).trim()));
+if (header.join('|') !== 'The medium|Its purpose|The year of implementation') fail(`unexpected header ${header.join(', ')}`);
+const source = sheetRows.map(([medium, purpose, year], i) => {
+  if (!medium || !purpose || year == null) fail(`sheet row ${i + 2} has an empty cell`);
+  const y = Number(year);
+  if (!Number.isInteger(y)) fail(`sheet row ${i + 2}: year "${year}" is not a whole year`);
+  return { n: i + 1, name: String(medium).trim(), purpose: String(purpose).trim(), year: y };
+});
+console.log(`• spreadsheet: ${source.length} rows`);
+
+// Report paragraph for each row, from the dataset notes' row-to-line map (292 rows).
+const inventory = new Map();
 for (const l of dataLines) {
   const m = l.match(/^- \*\*(\d{3})\. (.+?)\*\* → line (\d+)/);
-  if (m) inventory.push({ n: +m[1], name: m[2].trim(), line: +m[3] });
+  if (m) inventory.set(m[2].trim(), { ref: +m[1], line: +m[3] });
 }
-if (inventory.length !== 292) fail(`expected 292 inventory rows, found ${inventory.length}`);
+if (inventory.size !== 292) fail(`expected 292 inventory rows, found ${inventory.size}`);
 
-const sample = new Map();
-for (const l of dataLines.slice(42, 65)) {
-  const c = l.split('|').map((s) => s.trim());
-  if (c.length === 5 && c[1] && !c[1].startsWith('---') && c[1] !== 'The medium') sample.set(c[1], { purpose: c[2], year: c[3] });
-}
-if (sample.size !== 20) fail(`expected 20 sample rows, found ${sample.size}`);
-
-// Optional original CSV.
-const parseCsv = (txt) => {
-  const rows = [];
-  let row = [], cell = '', q = false;
-  for (let i = 0; i < txt.length; i++) {
-    const ch = txt[i];
-    if (q) {
-      if (ch === '"' && txt[i + 1] === '"') { cell += '"'; i++; }
-      else if (ch === '"') q = false;
-      else cell += ch;
-    } else if (ch === '"') q = true;
-    else if (ch === ',') { row.push(cell); cell = ''; }
-    else if (ch === '\n' || ch === '\r') {
-      if (ch === '\r' && txt[i + 1] === '\n') i++;
-      row.push(cell); rows.push(row); row = []; cell = '';
-    } else cell += ch;
-  }
-  if (cell || row.length) { row.push(cell); rows.push(row); }
-  return rows.filter((r) => r.some((c) => c.trim()));
-};
-const originalPath = path.join(root, 'data/surveillance_media.csv');
-const original = new Map();
-if (fs.existsSync(originalPath)) {
-  const [, ...rows] = parseCsv(fs.readFileSync(originalPath, 'utf8'));
-  for (const [medium, purpose, year] of rows) original.set(medium.trim().toLowerCase(), { purpose: purpose.trim(), year: year.trim() });
-  console.log(`• original CSV found: ${original.size} rows`);
-}
-
-const enrich = new Map(ROWS.map(([n, cat, sig, actor, purpose]) => [n, { cat, sig, actor, purpose }]));
-if (enrich.size !== 292) fail(`enrichment covers ${enrich.size} rows`);
-const described = new Map(DESCRIBED_YEARS.map(([n, value, file, line, note]) => [n, { value, file, line, note }]));
+const enrichByRef = new Map(ROWS.map(([ref, cat, sig, actor]) => [ref, { cat, sig, actor }]));
+const enrichByName = new Map(NEW_ROWS.map(([name, cat, sig, actor]) => [name, { cat, sig, actor }]));
+const described = new Map(DESCRIBED_YEARS.map(([ref, value, file, line, note]) => [ref, { value, file, line, note }]));
 
 const slug = (s) =>
-  s.toLowerCase().replace(/\(([^)]+)\)/g, ' $1').replace(/[‑–—/]/g, '-').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  s.toLowerCase().replace(/&/g, ' and ').replace(/\(([^)]+)\)/g, ' $1').replace(/[‑–—/]/g, '-').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-// ---------- year parsing (display string is never altered) ----------
-const parseYear = (value) => {
-  if (!value) return { kind: 'none' };
-  const v = value.trim();
-  if (/^unknown$/i.test(v)) return { kind: 'unknown' };
-  if (/^pre-1975$/i.test(v)) return { kind: 'pre', start: 1965, end: 1974 };
-  if (v.includes(';')) {
-    const stages = v.split(';').map((s) => {
-      const y = +s.match(/\d{4}/)[0];
-      return { year: y, label: s.replace(/approx\.\s*/, '').replace(String(y), '').replace(/from/, '').trim() || 'first' };
-    });
-    return { kind: 'staged', start: stages[0].year, end: stages.at(-1).year, stages, approx: /approx/.test(v) };
-  }
+/** Does a report year description ("pre-1975", "approx. 1980s", "1990 pilot"…) match a spreadsheet year? */
+const agrees = (value, year) => {
   let m;
-  if ((m = v.match(/^approx\. (\d{4})s$/))) return { kind: 'range', start: +m[1], end: +m[1] + 9, approx: true };
-  if ((m = v.match(/^approx\. (\d{4})[–-](\d{4})$/))) return { kind: 'range', start: +m[1], end: +m[2], approx: true };
-  if ((m = v.match(/^approx\. (\d{4})$/))) return { kind: 'approx', start: +m[1], end: +m[1], approx: true };
-  if ((m = v.match(/^(\d{4})$/))) return { kind: 'exact', start: +m[1], end: +m[1] };
-  if ((m = v.match(/^(\d{4}) (.+)$/))) return { kind: 'exact', start: +m[1], end: +m[1], label: m[2] };
-  fail(`unparsed year "${v}"`);
+  if (/^pre-1975$/.test(value)) return year < 1975;
+  if ((m = value.match(/^approx\. (\d{4})s$/))) return year >= +m[1] && year <= +m[1] + 9;
+  if ((m = value.match(/^approx\. (\d{4})/))) return Math.abs(year - +m[1]) <= 2;
+  if ((m = value.match(/^(\d{4})/))) return year === +m[1];
+  fail(`cannot compare report year "${value}"`);
 };
 
 const milestonesFor = new Map();
-for (const [n, year, kind, label, file, line] of MILESTONES) {
+for (const [ref, year, kind, label, file, line] of MILESTONES) {
   if (!lineAt(file, line).trim()) fail(`milestone line ${file}:${line} empty`);
-  if (!milestonesFor.has(n)) milestonesFor.set(n, []);
-  milestonesFor.get(n).push({ year, kind, label, file, line });
+  if (!milestonesFor.has(ref)) milestonesFor.set(ref, []);
+  milestonesFor.get(ref).push({ year, kind, label, file, line });
 }
 const notesFor = new Map();
-for (const [line, rows] of DATE_NOTES) {
-  const text = clean(lineAt('report', line));
-  const title = text.match(/^(.+?\.)\s/)?.[1] ?? '';
-  for (const n of rows) {
-    if (!notesFor.has(n)) notesFor.set(n, []);
-    notesFor.get(n).push({ line, title, text: text.slice(title.length).trim() });
-  }
-}
+for (const [line, refs] of DATE_NOTES) for (const ref of refs) notesFor.set(ref, [...(notesFor.get(ref) ?? []), line]);
 
 const CAT_ORDER = ['gov', 'police', 'city', 'remote', 'body', 'telecom', 'location', 'mobility', 'web', 'cloud', 'media', 'retail', 'finance', 'brokers', 'health', 'work', 'home', 'inference'];
+const groups = [...new Set(source.map((r) => r.purpose))];
 
-const entries = inventory.map(({ n, name, line }) => {
-  const e = enrich.get(n);
-  if (!CAT_ORDER.includes(e.cat)) fail(`row ${n}: unknown category ${e.cat}`);
-  const orig = original.get(name.toLowerCase());
-  const s = sample.get(name);
-  const d = described.get(n);
-  let purpose, purposeBasis, year = null, yearBasis = 'none', yearNote = null, yearSource = null;
-  if (orig) {
-    purpose = orig.purpose; purposeBasis = 'csv'; year = orig.year; yearBasis = 'csv';
-  } else if (s) {
-    purpose = s.purpose; purposeBasis = 'csv'; year = s.year; yearBasis = 'csv';
-    yearSource = { file: 'data', line: 43 };
-  } else {
-    if (!e.purpose) fail(`row ${n} (${name}) has no purpose`);
-    purpose = e.purpose; purposeBasis = 'report';
-    if (d) { year = d.value; yearBasis = 'described'; yearNote = d.note; yearSource = { file: d.file, line: d.line }; }
-  }
-  if (s && e.purpose) fail(`row ${n}: sample row should not carry a reconstructed purpose`);
-  const ms = (milestonesFor.get(n) ?? []).sort((a, b) => a.year - b.year);
-  let pos = parseYear(year);
-  if ((pos.kind === 'none' || pos.kind === 'unknown') && ms.length) {
-    const firm = ms.find((m) => ['first', 'pilot', 'national', 'example', 'documented', 'legal'].includes(m.kind));
-    const pick = firm ?? ms[0];
-    pos = { kind: 'milestone', start: pick.year, end: pick.year, milestoneKind: pick.kind, milestoneLabel: pick.label, unknownInCsv: pos.kind === 'unknown' };
-  }
-  paragraph(line); // validates the line
+const entries = source.map(({ n, name, purpose, year }) => {
+  const inv = inventory.get(name);
+  const e = inv ? enrichByRef.get(inv.ref) : enrichByName.get(name);
+  if (!e) fail(`no enrichment for "${name}" (add it to NEW_ROWS in scripts/enrichment.mjs)`);
+  if (!CAT_ORDER.includes(e.cat)) fail(`"${name}": unknown category ${e.cat}`);
+  if (inv) paragraph(inv.line); // validates the line
+  const d = inv ? described.get(inv.ref) : null;
+  // How the report itself dates the row, and whether that matches the spreadsheet.
+  const reportDating = d ? { value: d.value, file: d.file, line: d.line, note: d.note, agrees: agrees(d.value, year) } : null;
   return {
     id: slug(name),
     n,
+    ref: inv?.ref ?? null,
     name,
     purpose,
-    purposeBasis,
-    year,
-    yearBasis,
-    yearNote,
-    yearSource,
-    pos,
-    sortYear: pos.start ?? (pos.kind === 'unknown' ? 9998 : 9999),
+    group: groups.indexOf(purpose),
+    year: String(year),
+    yearNum: year,
+    reportDating,
     category: e.cat,
     signal: { v: 'visual', a: 'audio', r: 'radio', n: 'network', t: 'transaction', p: 'body', e: 'sensor', d: 'derived' }[e.sig],
     actor: { g: 'government', c: 'commercial', m: 'mixed' }[e.actor],
-    line,
-    section: sectionFor(line),
-    milestones: ms,
-    noteLines: (notesFor.get(n) ?? []).map((x) => x.line),
+    line: inv?.line ?? null,
+    section: inv ? sectionFor(inv.line) : null,
+    milestones: inv ? (milestonesFor.get(inv.ref) ?? []).sort((a, b) => a.year - b.year) : [],
+    noteLines: inv ? (notesFor.get(inv.ref) ?? []) : [],
     keys: [],
     moments: [],
     flows: [],
   };
 });
+for (const name of enrichByName.keys()) if (!source.some((r) => r.name === name)) fail(`NEW_ROWS entry "${name}" is not in the spreadsheet`);
+for (const name of inventory.keys()) if (!source.some((r) => r.name === name)) console.warn(`! report row "${name}" is not in the spreadsheet`);
 
 const ids = new Set();
 for (const e of entries) {
   if (ids.has(e.id)) fail(`duplicate id ${e.id}`);
   ids.add(e.id);
 }
-const byN = new Map(entries.map((e) => [e.n, e]));
-const need = (n, where) => byN.get(n) ?? fail(`${where}: unknown row ${n}`);
+// Narrative files refer to rows by report inventory number or by exact spreadsheet name.
+const byRef = new Map(entries.filter((e) => e.ref).map((e) => [e.ref, e]));
+const byName = new Map(entries.map((e) => [e.name, e]));
+const need = (r, where) => (typeof r === 'number' ? byRef.get(r) : byName.get(r)) ?? fail(`${where}: unknown row ${r}`);
+const byN = { get: (r) => need(r, 'lookup') };
 
 for (const k of KEYS) for (const n of k.rows) need(n, k.id).keys.push(k.id);
 for (const m of DAY) for (const [n, scope] of m.rows) need(n, `day ${m.id}`).moments.push({ id: m.id, scope });
@@ -283,12 +228,13 @@ for (const f of FLOWS) for (const s of f.steps) for (const n of s.rows) {
 const relations = RELATIONS.map(([a, b, type, basis, line, note]) => {
   need(a, 'relation'); need(b, 'relation');
   if (!['documented', 'illustrative'].includes(basis)) fail(`relation basis ${basis}`);
-  if (!lineAt('report', line).trim()) fail(`relation line ${line} empty`);
+  if (basis === 'documented' && !line) fail(`documented relation ${a}→${b} needs a report line`);
+  if (line && !lineAt('report', line).trim()) fail(`relation line ${line} empty`);
   return { source: byN.get(a).id, target: byN.get(b).id, type, basis, line, note };
 });
 // Rows described together in one report paragraph.
 const byLine = new Map();
-for (const e of entries) {
+for (const e of entries.filter((x) => x.line)) {
   if (!byLine.has(e.line)) byLine.set(e.line, []);
   byLine.get(e.line).push(e.id);
 }
@@ -341,19 +287,18 @@ const citations = [...usedCites].sort().map((id) => {
 });
 
 const meta = {
-  generatedFrom: original.size ? 'original-csv' : 'reconstruction',
+  source: 'research/surveillance_media.xlsx',
   counts: {
     rows: entries.length,
-    purposeCsv: entries.filter((e) => e.purposeBasis === 'csv').length,
-    yearCsv: entries.filter((e) => e.yearBasis === 'csv').length,
-    yearDescribed: entries.filter((e) => e.yearBasis === 'described').length,
-    yearNone: entries.filter((e) => e.yearBasis === 'none').length,
-    placed: entries.filter((e) => e.pos.start != null).length,
-    placedFromMilestone: entries.filter((e) => e.pos.kind === 'milestone').length,
+    inReport: entries.filter((e) => e.line).length,
+    sheetOnly: entries.filter((e) => !e.line).length,
+    reportDatesDiffer: entries.filter((e) => e.reportDating && !e.reportDating.agrees).length,
+    before1975: entries.filter((e) => e.yearNum < 1975).length,
+    groups: groups.length,
     relationsDocumented: relations.filter((r) => r.basis === 'documented').length,
     relationsIllustrative: relations.filter((r) => r.basis === 'illustrative').length,
   },
-  datasetSummary: { exact: 31, approx: 220, pre1975: 28, unknown: 9, staged: 3, approxStaged: 1 },
+  yearRange: [Math.min(...entries.map((e) => e.yearNum)), Math.max(...entries.map((e) => e.yearNum))],
 };
 
 write('entries.json', entries);
@@ -366,12 +311,12 @@ const quote = (file, line) => {
   quoted[file][line] = { title: t ? clean(t[1]).replace(/\.$/, '') : null, text: clean(t ? t[2] : raw.replace(/^[-|]\s*/, '')), cites: citesIn(raw) };
 };
 for (const e of entries) {
-  quote('report', e.line);
+  if (e.line) quote('report', e.line);
   e.noteLines.forEach((l) => quote('report', l));
   e.milestones.forEach((m) => quote(m.file, m.line));
-  if (e.yearSource) quote(e.yearSource.file, e.yearSource.line);
+  if (e.reportDating) quote(e.reportDating.file, e.reportDating.line);
 }
-relations.forEach((r) => quote('report', r.line));
+relations.forEach((r) => r.line && quote('report', r.line));
 FLOWS.forEach((f) => f.steps.forEach((s) => quote('report', s.line)));
 CONTEXT_EVENTS.forEach((c) => quote('report', c.line));
 KEYS.forEach((k) => quote('report', k.line));
@@ -406,12 +351,13 @@ write('report.json', {
   pattern: clean(reportLines[411]),
 });
 
-// Three-column CSV assembled from the supplied files (does not replace an original).
-const esc = (s) => (/[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s);
-const csv = ['The medium,Its purpose,The year of implementation', ...entries.map((e) => [e.name, e.purpose, e.year ?? 'not in supplied files'].map(esc).join(','))].join('\n');
+// Plain three-column export of the spreadsheet, for download.
+const esc = (v) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
+const csv = ['The medium,Its purpose,The year of implementation', ...source.map((r) => [r.name, r.purpose, String(r.year)].map(esc).join(','))].join('\n') + '\n';
 fs.mkdirSync(path.join(root, 'data'), { recursive: true });
-fs.writeFileSync(path.join(root, 'data/surveillance_media.reconstructed.csv'), csv + '\n');
+fs.writeFileSync(path.join(root, 'data/surveillance_media.csv'), csv);
 fs.mkdirSync(path.join(root, 'public/data'), { recursive: true });
-fs.writeFileSync(path.join(root, 'public/data/surveillance_media.reconstructed.csv'), csv + '\n');
+fs.writeFileSync(path.join(root, 'public/data/surveillance_media.csv'), csv);
+fs.copyFileSync(path.join(root, 'research/surveillance_media.xlsx'), path.join(root, 'public/data/surveillance_media.xlsx'));
 
 console.log('✓ data built', meta.counts);

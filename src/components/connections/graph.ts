@@ -34,7 +34,7 @@ export function buildGraph() {
   relations.forEach((r) => add(r.source, r.target, r.basis, { note: r.note, line: r.line }));
   linkKeys.forEach((k) => k.members.forEach((m) => add(k.id, m, 'key')));
   const byLine = new Map<number, string[]>();
-  entries.forEach((e) => byLine.set(e.line, [...(byLine.get(e.line) ?? []), e.id]));
+  entries.forEach((e) => e.line != null && byLine.set(e.line, [...(byLine.get(e.line) ?? []), e.id]));
   byLine.forEach((ids) => ids.forEach((a, i) => ids.slice(i + 1).forEach((b) => add(a, b, 'paragraph'))));
   return g;
 }

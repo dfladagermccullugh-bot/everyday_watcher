@@ -5,7 +5,6 @@ import { Linkage } from '@/components/discover/Linkage';
 import { entries, meta, timelineContext, flows } from '@/lib/data';
 
 export default function Discover() {
-  const placed = entries.filter((e) => e.pos.start != null).length;
   return (
     <>
       <section className="relative overflow-hidden">
@@ -73,7 +72,7 @@ export default function Discover() {
         </h2>
         <ul className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { href: '/timeline/', title: 'Timeline', text: `${placed} systems with dates in the supplied files, plus ${timelineContext.context.length} laws and oversight events.`, n: '01' },
+            { href: '/timeline/', title: 'Timeline', text: `${entries.length} systems from ${meta.yearRange[0]} to ${meta.yearRange[1]}, plus ${timelineContext.context.length} laws and oversight events.`, n: '01' },
             { href: '/atlas/', title: 'Atlas', text: `All ${entries.length} systems, searchable and filterable, each traced to the paragraph it comes from.`, n: '02' },
             { href: '/connections/', title: 'Connections', text: `${meta.counts.relationsDocumented} documented relationships and the identifiers that join records.`, n: '03' },
             { href: '/follow/', title: 'Follow the Data', text: `${flows.length} journeys from raw collection to linking, inference, and use.`, n: '04' },

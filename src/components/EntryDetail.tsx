@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { useState } from 'react';
 import clsx from 'clsx';
 import {
-  CATEGORIES, SIGNALS, ACTORS, SCOPES, day, flows, keyById, quote, citationById, relationsFor, siblingsOf, getEntry,
+  CATEGORIES, SIGNALS, ACTORS, SCOPES, day, flows, keyById, quote, citationById, relationsFor, siblingsOf, groupOf, sheetRow, getEntry,
   type Entry,
 } from '@/lib/data';
-import { MILESTONE_KIND, purposeBasisText, yearBasisText, yearLabel } from '@/lib/format';
+import { MILESTONE_KIND, yearBasisText } from '@/lib/format';
 import { BasisBadge, EntryPill, ScopeLabel, SignalDot, SourceRef } from './ui';
 
 const TYPE_VERB: Record<string, [string, string]> = {
@@ -26,7 +26,6 @@ export function EntryDetail({ entry: e, headingLevel = 'h2' }: { entry: Entry; h
   const documented = rels.filter((r) => r.basis === 'documented');
   const illustrative = rels.filter((r) => r.basis === 'illustrative');
   const siblings = siblingsOf(e);
-  const placed = e.pos.start != null;
 
   return (
     <article className="text-paper">
@@ -43,22 +42,22 @@ export function EntryDetail({ entry: e, headingLevel = 'h2' }: { entry: Entry; h
         <span className="text-paper-3">·</span>
         <span>{ACTORS[e.actor]}</span>
         <span className="text-paper-3">·</span>
-        <span className="text-paper-3">{e.section}</span>
+        <span className="text-paper-3">{e.section ?? 'Spreadsheet only — not described in the report'}</span>
       </div>
 
       <section className="mt-8 grid gap-6 sm:grid-cols-[1fr_auto]">
         <div>
           <h3 className="eyebrow">Purpose</h3>
           <p className="mt-2 text-[1.1875rem] leading-snug text-paper text-pretty">{e.purpose}</p>
-          <p className={clsx('mt-2 text-xs leading-relaxed', e.purposeBasis === 'csv' ? 'text-paper-3' : 'text-ill/90')}>{purposeBasisText(e)}</p>
+          <SourceRef file="sheet" line={sheetRow(e)} className="mt-2" />
         </div>
         <div className="sm:min-w-[11rem] sm:border-l sm:border-line sm:pl-6">
           <h3 className="eyebrow">Implementation year</h3>
-          <p className={clsx('mt-2 font-mono text-[1.35rem] leading-tight tabular', e.year ? 'text-paper' : 'text-paper-3')}>{yearLabel(e)}</p>
-          {e.yearSource && <SourceRef file={e.yearSource.file} line={e.yearSource.line} className="mt-1.5" />}
+          <p className="mt-2 font-mono text-[1.35rem] leading-tight text-paper tabular">{e.year}</p>
         </div>
       </section>
       <p className="mt-3 text-[0.8125rem] leading-relaxed text-paper-3">{yearBasisText(e)}</p>
+      {e.reportDating && <ReportDatingNote entry={e} />}
 
       {e.milestones.length > 0 && (
         <section className="mt-7">
@@ -88,7 +87,7 @@ export function EntryDetail({ entry: e, headingLevel = 'h2' }: { entry: Entry; h
             {para.title && <p className="font-serif text-xl leading-tight text-paper">{para.title}</p>}
             <p className="mt-2 text-[0.9375rem] leading-relaxed text-paper-2 text-pretty">{para.text}</p>
             <footer className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-              <SourceRef line={e.line} />
+              <SourceRef line={e.line!} />
               {para.cites.map((c) => (
                 <span key={c} className="rounded-full border border-line px-2 py-0.5 font-mono text-[0.625rem] text-paper-3" title={`Citation token ${c}`}>
                   {citationById.get(c)?.label ?? c}
@@ -117,7 +116,7 @@ export function EntryDetail({ entry: e, headingLevel = 'h2' }: { entry: Entry; h
                     <BasisBadge basis={r.basis} />
                   </div>
                   <p className="mt-2 text-[0.8125rem] leading-relaxed text-paper-2">{r.note}</p>
-                  <SourceRef line={r.line} className="mt-1.5" />
+                  {r.line ? <SourceRef line={r.line} className="mt-1.5" /> : <p className="mt-1.5 font-mono text-[0.6875rem] text-paper-3">Not stated in the report</p>}
                 </li>
               );
             })}
@@ -188,8 +187,49 @@ export function EntryDetail({ entry: e, headingLevel = 'h2' }: { entry: Entry; h
         </p>
       )}
 
-      <EntryActions entry={e} placed={placed} />
+      {!para && <SheetOnly entry={e} />}
+
+      <EntryActions entry={e} />
     </article>
+  );
+}
+
+function ReportDatingNote({ entry: e }: { entry: Entry }) {
+  const d = e.reportDating!;
+  return (
+    <div className={clsx('mt-4 rounded-xl border p-4 text-[0.8125rem] leading-relaxed', d.agrees ? 'border-line text-paper-3' : 'border-sig-visual/40 bg-sig-visual/5 text-paper-2')}>
+      <p>
+        <span className={clsx('mr-2 font-mono text-[0.625rem] uppercase tracking-[0.12em]', d.agrees ? 'text-paper-3' : 'text-sig-visual')}>
+          {d.agrees ? 'Consistent with the report' : 'The report dates this differently'}
+        </span>
+        Report: <span className="font-mono text-paper">{d.value}</span>. {d.note}
+      </p>
+      <SourceRef file={d.file} line={d.line} className="mt-1.5" />
+    </div>
+  );
+}
+
+/** Rows the report does not describe: say so, and show the spreadsheet's own grouping. */
+function SheetOnly({ entry: e }: { entry: Entry }) {
+  const group = groupOf(e);
+  return (
+    <section className="mt-8 rounded-2xl border border-dashed border-line-3 p-5">
+      <h3 className="eyebrow">Not in the report</h3>
+      <p className="mt-2 text-[0.9375rem] leading-relaxed text-paper-2">
+        This system was added in the updated spreadsheet. The research report does not describe it, so there is no paragraph, citation, or stated
+        relationship to show. Its purpose and year come from the spreadsheet alone.
+      </p>
+      {group.length > 0 && (
+        <>
+          <p className="eyebrow mt-5">Shares its purpose wording with</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {group.slice(0, 12).map((g) => (
+              <EntryPill key={g.id} id={g.id} />
+            ))}
+          </div>
+        </>
+      )}
+    </section>
   );
 }
 
@@ -225,7 +265,7 @@ function DateNotes({ lines }: { lines: number[] }) {
   );
 }
 
-function EntryActions({ entry: e, placed }: { entry: Entry; placed: boolean }) {
+function EntryActions({ entry: e }: { entry: Entry }) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     const url = `${window.location.origin}/atlas/${e.id}/`;
@@ -243,11 +283,9 @@ function EntryActions({ entry: e, placed }: { entry: Entry; placed: boolean }) {
       <button type="button" onClick={copy} className={cls} aria-live="polite">
         {copied ? 'Link copied' : 'Copy link'}
       </button>
-      {placed && (
-        <Link href={`/timeline/?focus=${e.id}`} className={cls}>
-          See on timeline
-        </Link>
-      )}
+      <Link href={`/timeline/?focus=${e.id}`} className={cls}>
+        See on timeline
+      </Link>
       <Link href={`/connections/?node=${e.id}`} className={cls}>
         See connections
       </Link>

@@ -5,7 +5,7 @@ import { citations, entries, meta, relations, quote } from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'Sources & Method',
-  description: 'How the dataset was compiled, what is missing from the supplied files, what the site does and does not measure, and every citation.',
+  description: 'How the dataset was compiled, where the spreadsheet and report differ, what the site does and does not measure, and every citation.',
 };
 
 function Stat({ n, label }: { n: number | string; label: string }) {
@@ -31,26 +31,32 @@ function Q({ line, file = 'report' as const }: { line: number; file?: 'report' |
 
 export default function SourcesPage() {
   const c = meta.counts;
-  const unknown = entries.filter((e) => e.year === 'unknown').length;
-  const undated = entries.filter((e) => e.pos.start == null).length;
+  const differ = entries.filter((e) => e.reportDating && !e.reportDating.agrees);
   return (
     <Shell className="pb-28 pt-[calc(var(--nav-h)+3.5rem)]">
       <PageIntro eyebrow="Sources & Method" title="What this is built from, and what it cannot tell you.">
         <p>
-          Two supplied files are the sources of truth: a research report and a set of dataset notes describing a 292-row, three-column CSV. Both are
-          reproduced in full with numbered lines, and every reference on this site links to a line.
+          The project spreadsheet is the source of truth for every system’s name, purpose, and year. The research report supplies context:
+          explanations, citations, dated milestones, and the relationships between systems. Both are reproduced in full, and every reference on this
+          site links to a spreadsheet row or a report line.
         </p>
       </PageIntro>
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <Link href="/sources/report/" className="inline-flex min-h-11 items-center rounded-full bg-paper px-5 text-sm font-medium text-ink">
+        <Link href="/sources/spreadsheet/" className="inline-flex min-h-11 items-center rounded-full bg-paper px-5 text-sm font-medium text-ink">
+          View the spreadsheet
+        </Link>
+        <Link href="/sources/report/" className="inline-flex min-h-11 items-center rounded-full border border-line-3 px-5 text-sm text-paper">
           Read the report
         </Link>
         <Link href="/sources/dataset/" className="inline-flex min-h-11 items-center rounded-full border border-line-3 px-5 text-sm text-paper">
           Read the dataset notes
         </Link>
-        <a href="/data/surveillance_media.reconstructed.csv" download className="inline-flex min-h-11 items-center rounded-full border border-line-3 px-5 text-sm text-paper">
-          Download the assembled CSV
+        <a href="/data/surveillance_media.xlsx" download className="inline-flex min-h-11 items-center rounded-full border border-line-3 px-5 text-sm text-paper">
+          Download .xlsx
+        </a>
+        <a href="/data/surveillance_media.csv" download className="inline-flex min-h-11 items-center rounded-full border border-line-3 px-5 text-sm text-paper">
+          Download .csv
         </a>
       </div>
 
@@ -58,29 +64,31 @@ export default function SourcesPage() {
         <h2 className="font-serif text-[2.4rem] leading-tight">The state of the data</h2>
         <div className="mt-6 max-w-3xl space-y-4 text-[1.0625rem] leading-relaxed text-paper-2">
           <p>
-            The CSV itself was not among the supplied files. The dataset notes name all 292 rows and map each to a report paragraph, but include the
-            original purpose and year for only {c.purposeCsv} of them. The site does not invent the rest.
+            The spreadsheet lists {c.rows} systems, each with one purpose and one year from {meta.yearRange[0]} to {meta.yearRange[1]}. Purposes are
+            written per group: {c.groups} distinct wordings cover all rows. {c.inReport} systems match the report’s inventory by name and link to the
+            paragraph that describes them. {c.sheetOnly} were added in the spreadsheet and have no report text, citation, or stated relationship.
+          </p>
+          <p>
+            Where the report itself dates a system, the site shows both. They disagree for {differ.length}:{' '}
+            {differ.map((e, i) => (
+              <span key={e.id}>
+                {i > 0 && (i === differ.length - 1 ? ' and ' : ', ')}
+                {e.name} ({e.year} in the spreadsheet; {e.reportDating!.value} in the report)
+              </span>
+            ))}
+            . The spreadsheet year is used for placement.
           </p>
         </div>
         <div className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-          <Stat n={c.rows} label="Rows, each mapped to a report paragraph" />
-          <Stat n={c.yearCsv} label="Rows with purpose and year from the supplied CSV sample" />
-          <Stat n={c.yearDescribed} label="Other rows whose CSV year the report or notes describe" />
-          <Stat n={c.placedFromMilestone} label="Rows placed on the timeline only by a dated report milestone" />
-          <Stat n={unknown} label="Rows recorded as unknown in the CSV" />
-          <Stat n={undated} label="Rows not on the timeline" />
+          <Stat n={c.rows} label="Systems in the spreadsheet" />
+          <Stat n={c.inReport} label="Also described in the report" />
+          <Stat n={c.sheetOnly} label="Spreadsheet only" />
+          <Stat n={c.before1975} label="Dated before 1975, drawn compressed on the timeline" />
+          <Stat n={c.groups} label="Distinct purpose wordings" />
+          <Stat n={differ.length} label="Rows the report dates differently" />
           <Stat n={c.relationsDocumented} label="Relationships stated in the report" />
           <Stat n={c.relationsIllustrative} label="Illustrative relationships, marked as such" />
         </div>
-        <div className="mt-8 grid gap-6 lg:grid-cols-2">
-          <Q file="data" line={13} />
-          <Q file="data" line={17} />
-        </div>
-        <p className="mt-6 max-w-3xl text-sm leading-relaxed text-paper-3">
-          The counts in the second quotation describe the full CSV. They cannot be reproduced here because the CSV was not attached. To use it, place it at{' '}
-          <code className="rounded bg-ink-3 px-1 font-mono">data/surveillance_media.csv</code> and rebuild: its purpose and year values replace the
-          reconstructed ones automatically, matched by medium name.
-        </p>
       </section>
 
       <section id="method" className="mt-20 scroll-mt-28">
@@ -116,16 +124,16 @@ export default function SourcesPage() {
       <section id="added" className="mt-20 scroll-mt-28">
         <h2 className="font-serif text-[2.4rem] leading-tight">What this site adds</h2>
         <p className="mt-4 max-w-3xl text-[1.0625rem] leading-relaxed text-paper-2">
-          Internal fields support exploration. None are added to the CSV, and the editorial ones are labeled where they appear.
+          Internal fields support exploration. None are added to the spreadsheet, and the editorial ones are labeled where they appear.
         </p>
         <dl className="mt-8 grid gap-x-10 gap-y-6 md:grid-cols-2">
           {[
-            ['Stable ID, report line, report section', 'Derived mechanically from the dataset notes’ row-to-line map.'],
-            ['Purpose for rows outside the sample', 'A paraphrase of the mapped report paragraph. Flagged on every entry.'],
+            ['Stable ID and spreadsheet row', 'Every entry links back to its spreadsheet row.'],
+            ['Report link', 'Rows are matched to report paragraphs by exact name through the dataset notes’ row-to-line map. Spreadsheet-only rows are labeled.'],
             ['Signal type', 'Based on the report’s own signal-to-linkage table (visual, radio, network, transaction, physiological, environmental, derived), plus audio.'],
             ['Category and operator', 'Editorial groupings of each paragraph’s description. Categories refine the brief’s proposed list against the research.'],
-            ['Dated milestones', 'Only dates the report or notes state, with their line. Kinds distinguish first deployment, pilot, law, standard, example, and adoption.'],
-            ['Relationships and linking keys', `Each of the ${relations.length} relationships cites a report line and is marked documented or illustrative.`],
+            ['Dated milestones', 'Only dates the report or notes state, with their line, shown beside the spreadsheet year. Kinds distinguish first deployment, pilot, law, standard, example, and adoption.'],
+            ['Relationships and linking keys', `Each of the ${relations.length} relationships is marked documented (with its report line) or illustrative. All relationships involving spreadsheet-only rows are illustrative.`],
             ['Scope in “An ordinary day”', 'Common, conditional, or location-specific: an editorial reading, not measured prevalence.'],
             ['Citation labels', 'The report contains citation tokens, not URLs. Labels name the source the cited sentence describes.'],
           ].map(([t, d]) => (
@@ -143,12 +151,16 @@ export default function SourcesPage() {
           <li>— How much surveillance exists, or how it grew. More entries in a decade reflects what the research documents and dates.</li>
           <li>— How common any system is, or whether it is present where you live.</li>
           <li>— Whether any use is lawful or improper. Inclusion does not imply either.</li>
-          <li>— When a technology was invented or became widespread. A date is the earliest documented deployment of the modern form.</li>
+          <li>— When a technology was invented or became widespread. A year is the earliest practical introduction or documented deployment of the modern form.</li>
           <li>— Relationships the report does not state. Absence of a connection is a gap in the research, not evidence that none exists.</li>
         </ul>
         <div className="mt-8 max-w-3xl">
           <Q file="data" line={397} />
         </div>
+        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-paper-3">
+          The dataset notes describe an earlier 292-row reconstruction with approximate dates. The spreadsheet supersedes it; those notes are kept for
+          their row-to-paragraph map and date caveats.
+        </p>
       </section>
 
       <section id="citations" className="mt-20 scroll-mt-28">

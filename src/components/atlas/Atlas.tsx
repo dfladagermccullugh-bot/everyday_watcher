@@ -8,31 +8,30 @@ import {
   entries, CATEGORIES, CATEGORY_ORDER, SIGNALS, SIGNAL_ORDER, ACTORS, type Entry, type CategoryId, type SignalId, type Actor,
 } from '@/lib/data';
 import { search } from '@/lib/search';
+import { PERIODS, periodOf } from '@/lib/format';
 import { useQueryState } from '@/lib/url-state';
 import { useUI } from '@/lib/store';
 import { Chip, SignalDot, YearBadge } from '../ui';
 
-type DateStatus = 'dated' | 'milestone' | 'unknown' | 'missing';
-const DATE_STATUS: Record<DateStatus, { label: string; hint: string }> = {
-  dated: { label: 'Year in the data', hint: 'A CSV year is in the supplied files' },
-  milestone: { label: 'Report milestone only', hint: 'No CSV year; the report states a dated milestone' },
-  unknown: { label: 'Unknown in CSV', hint: 'The CSV records the year as unknown' },
-  missing: { label: 'Not in supplied files', hint: 'No CSV year or report date is available' },
+type Source = 'report' | 'sheet';
+const SOURCES: Record<Source, { label: string; hint: string }> = {
+  report: { label: 'Described in the report', hint: 'Linked to a paragraph of the research report' },
+  sheet: { label: 'Spreadsheet only', hint: 'Added in the updated spreadsheet; not described in the report' },
 };
-const dateStatus = (e: Entry): DateStatus =>
-  e.year === 'unknown' ? 'unknown' : e.year ? 'dated' : e.pos.kind === 'milestone' ? 'milestone' : 'missing';
+const sourceOf = (e: Entry): Source => (e.line ? 'report' : 'sheet');
 
 type Sort = 'category' | 'az' | 'year' | 'relevance';
 const SORTS: Record<Sort, string> = { category: 'By category', year: 'Earliest first', az: 'A–Z', relevance: 'Best match' };
 
-type Filters = { cat: string[]; sig: string[]; date: string[]; actor: string[] };
+type Filters = { cat: string[]; sig: string[]; period: string[]; src: string[]; actor: string[] };
 
 function applyFilters(list: Entry[], f: Filters, skip?: keyof Filters) {
   return list.filter(
     (e) =>
       (skip === 'cat' || !f.cat.length || f.cat.includes(e.category)) &&
       (skip === 'sig' || !f.sig.length || f.sig.includes(e.signal)) &&
-      (skip === 'date' || !f.date.length || f.date.includes(dateStatus(e))) &&
+      (skip === 'period' || !f.period.length || f.period.includes(periodOf(e))) &&
+      (skip === 'src' || !f.src.length || f.src.includes(sourceOf(e))) &&
       (skip === 'actor' || !f.actor.length || f.actor.includes(e.actor)),
   );
 }
@@ -43,7 +42,7 @@ export function Atlas() {
   const [q, setQ] = useState(urlQ);
   const deferredQ = useDeferredValue(q);
   const inputRef = useRef<HTMLInputElement>(null);
-  const filters: Filters = { cat: list('cat'), sig: list('sig'), date: list('date'), actor: list('actor') };
+  const filters: Filters = { cat: list('cat'), sig: list('sig'), period: list('period'), src: list('src'), actor: list('actor') };
   const sortParam = (get('sort') as Sort) || null;
   const sort: Sort = sortParam ?? (deferredQ.trim() ? 'relevance' : 'category');
 
@@ -75,11 +74,11 @@ export function Atlas() {
   const results = useMemo(() => {
     const r = applyFilters(base, filters);
     if (sort === 'az') return [...r].sort((a, b) => a.name.localeCompare(b.name));
-    if (sort === 'year') return [...r].sort((a, b) => a.sortYear - b.sortYear || a.n - b.n);
+    if (sort === 'year') return [...r].sort((a, b) => a.yearNum - b.yearNum || a.n - b.n);
     if (sort === 'relevance' && scores) return [...r].sort((a, b) => scores.get(a.id)! - scores.get(b.id)!);
     return r;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [base, filters.cat.join(), filters.sig.join(), filters.date.join(), filters.actor.join(), sort, scores]);
+  }, [base, filters.cat.join(), filters.sig.join(), filters.period.join(), filters.src.join(), filters.actor.join(), sort, scores]);
 
   const facetCounts = useMemo(() => {
     const count = <K extends string>(key: keyof Filters, fn: (e: Entry) => K) => {
@@ -90,20 +89,21 @@ export function Atlas() {
     return {
       cat: count('cat', (e) => e.category),
       sig: count('sig', (e) => e.signal),
-      date: count('date', dateStatus),
+      period: count('period', periodOf),
+      src: count('src', sourceOf),
       actor: count('actor', (e) => e.actor),
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [base, filters.cat.join(), filters.sig.join(), filters.date.join(), filters.actor.join()]);
+  }, [base, filters.cat.join(), filters.sig.join(), filters.period.join(), filters.src.join(), filters.actor.join()]);
 
   const toggle = (key: keyof Filters, value: string) => {
     const cur = filters[key];
     set({ [key]: cur.includes(value) ? cur.filter((v) => v !== value) : [...cur, value] });
   };
-  const activeCount = filters.cat.length + filters.sig.length + filters.date.length + filters.actor.length;
+  const activeCount = filters.cat.length + filters.sig.length + filters.period.length + filters.src.length + filters.actor.length;
   const clearAll = () => {
     setQ('');
-    set({ q: null, cat: null, sig: null, date: null, actor: null, sort: null });
+    set({ q: null, cat: null, sig: null, period: null, src: null, actor: null, sort: null });
   };
 
   const facets = <Facets filters={filters} counts={facetCounts} toggle={toggle} />;
@@ -198,8 +198,11 @@ export function Atlas() {
               {filters.sig.map((s) => (
                 <ActivePill key={s} label={`${SIGNALS[s as SignalId]?.label ?? s} signal`} onClear={() => toggle('sig', s)} />
               ))}
-              {filters.date.map((d) => (
-                <ActivePill key={d} label={DATE_STATUS[d as DateStatus]?.label ?? d} onClear={() => toggle('date', d)} />
+              {filters.period.map((d) => (
+                <ActivePill key={d} label={PERIODS.find((p) => p.id === d)?.label ?? d} onClear={() => toggle('period', d)} />
+              ))}
+              {filters.src.map((d) => (
+                <ActivePill key={d} label={SOURCES[d as Source]?.label ?? d} onClear={() => toggle('src', d)} />
               ))}
               {filters.actor.map((a) => (
                 <ActivePill key={a} label={ACTORS[a as Actor] ?? a} onClear={() => toggle('actor', a)} />
@@ -229,7 +232,7 @@ function Facets({
   filters, counts, toggle,
 }: {
   filters: Filters;
-  counts: { cat: Map<string, number>; sig: Map<string, number>; date: Map<string, number>; actor: Map<string, number> };
+  counts: { cat: Map<string, number>; sig: Map<string, number>; period: Map<string, number>; src: Map<string, number>; actor: Map<string, number> };
   toggle: (k: keyof Filters, v: string) => void;
 }) {
   return (
@@ -272,11 +275,21 @@ function Facets({
         </ul>
       </fieldset>
       <fieldset>
-        <legend className="eyebrow mb-3">Year status</legend>
+        <legend className="eyebrow mb-3">Period</legend>
         <div className="flex flex-wrap gap-1.5">
-          {(Object.keys(DATE_STATUS) as DateStatus[]).map((d) => (
-            <Chip key={d} active={filters.date.includes(d)} onClick={() => toggle('date', d)} count={counts.date.get(d) ?? 0} title={DATE_STATUS[d].hint}>
-              {DATE_STATUS[d].label}
+          {PERIODS.map((p) => (
+            <Chip key={p.id} active={filters.period.includes(p.id)} onClick={() => toggle('period', p.id)} count={counts.period.get(p.id) ?? 0}>
+              {p.label}
+            </Chip>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend className="eyebrow mb-3">Source</legend>
+        <div className="flex flex-wrap gap-1.5">
+          {(Object.keys(SOURCES) as Source[]).map((d) => (
+            <Chip key={d} active={filters.src.includes(d)} onClick={() => toggle('src', d)} count={counts.src.get(d) ?? 0} title={SOURCES[d].hint}>
+              {SOURCES[d].label}
             </Chip>
           ))}
         </div>
