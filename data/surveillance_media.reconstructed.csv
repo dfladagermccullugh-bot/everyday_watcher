@@ -1,0 +1,293 @@
+The medium,Its purpose,The year of implementation
+Fixed public CCTV,"Create time-stamped public-space visual records of presence, movement, companions, vehicles, and events.",pre-1975
+Private-business CCTV,"Retain visual records for security, loss prevention, safety, and disputes.",pre-1975
+Residential security cameras,"Observe doorways, property, corridors, and nearby spaces.",approx. 1990s
+Video doorbell cameras,"Observe doorways, sidewalks, visitors, and nearby activity.",approx. 2013
+Police dash cameras,Create mobile video and audio records associated with police vehicles.,unknown
+Police body-worn cameras,Create mobile video and audio records associated with officers.,2005
+Traffic cameras,"Record vehicle presence and often time, direction, speed, or plate data.",unknown
+Red-light cameras,Record vehicles and violations at controlled intersections.,unknown
+Speed cameras,Measure and record vehicles for automated speed enforcement.,unknown
+ANPR/ALPR,"Convert plate images into searchable plate, place, and time records.",approx. 1970s
+Parking plate recognition,"Record vehicle entry, exit, parking, or enforcement events from plates.",approx. 2000s
+Toll plate recognition,Identify vehicles for toll billing and crossing records.,approx. 2000s
+CCTV video analytics,"Automatically detect, count, classify, or track people and objects.",approx. 2000s
+Multi-camera trajectory reconstruction,Reconstruct movement across multiple camera observations.,approx. 2000s
+Facial recognition,Convert faces into biometric representations and compare them with other images.,1993
+Live facial recognition,Compare live camera feeds with face references in near real time.,approx. 2010s
+Face watchlists,Alert when observed faces may match selected reference identities.,approx. 2010s
+Social-network facial recognition,Link recurring faces across social or personal images.,approx. 2010
+Photo face clustering,Group images that appear to contain the same person.,approx. 2010s
+Reverse image search,Find visually similar images across files or online contexts.,approx. 2000s
+Perceptual image matching,Match visually similar copies of an image even when filenames and ordinary metadata differ.,not in supplied files
+Gait recognition,"Identify or classify a person from the way they walk, even when facial detail is poor.",not in supplied files
+Pose estimation,Estimate body joints and actions from images or video.,not in supplied files
+Body-shape analysis,Identify or classify a person from body shape when other detail is limited.,not in supplied files
+Thermal imaging,"Reveal heat patterns, human presence, machinery activity, and temperature.",not in supplied files
+Temperature screening,Screen the body temperature of people passing a checkpoint.,not in supplied files
+Depth cameras,"Collect geometry to map bodies, rooms, occupancy, and movement.",not in supplied files
+LiDAR sensing,"Map pedestrians, vehicles, spaces, and movement with laser-ranged geometry.",unknown
+Millimeter-wave body scanners,Inspect the body for concealed objects during security screening.,not in supplied files
+Backscatter body scanners,Inspect the body for concealed objects using backscattered radiation.,not in supplied files
+Aerial photography,Photograph the ground from aircraft across large areas.,not in supplied files
+Helicopter surveillance,"Observe people, vehicles, and events from the air.",not in supplied files
+Drone surveillance,Observe areas from otherwise inaccessible viewpoints with uncrewed aircraft.,approx. 2005
+Persistent wide-area aerial surveillance,Record a large geographic zone so earlier movement can be reconstructed after an event.,not in supplied files
+Satellite remote sensing,Collect recurring imagery of the Earth’s surface over large areas.,pre-1975
+Commercial high-resolution satellite imaging,"Supply detailed, frequently refreshed imagery for mapping, change detection, and property analysis.",not in supplied files
+Street-level panoramic imagery,Capture panoramic street-level views for mapping and location intelligence.,not in supplied files
+In-vehicle cameras,"Record the road and the cabin in cars, fleets, taxis, and delivery vehicles.",not in supplied files
+Driver monitoring systems,"Estimate a driver’s gaze, attention, distraction, fatigue, and seat occupancy.",not in supplied files
+Retail shelf cameras,"Identify products, shelf state, and customer movement in stores.",not in supplied files
+Cashierless computer vision,"Track hands, products, and carts so that observation becomes the checkout.",not in supplied files
+Wiretaps,Intercept the content of communications under legal authority.,pre-1975
+Call-content interception,Capture call content as it is routed through digital telecommunications systems.,not in supplied files
+Call recording,"Retain voices, conversation content, timestamps, and caller numbers for service, compliance, and records.",not in supplied files
+Voicemail,Store recorded voice messages with caller and time details.,not in supplied files
+Gunshot detection,Classify impulsive sounds and estimate where gunfire occurred.,not in supplied files
+Public microphone networks,"Detect alarms, breaking glass, traffic noise, machinery, or crowd noise in public space.",unknown
+Voice assistants,Recognize spoken commands and activate services.,not in supplied files
+Smart speakers,Listen for voice commands through always-available microphones in the home.,not in supplied files
+Smart-TV microphones,Capture voice commands spoken to a connected television.,not in supplied files
+Automatic content recognition (ACR),Recognize what is displayed on a television screen to build viewing data.,not in supplied files
+Voiceprints,"Model how a person speaks for authentication, fraud detection, or identification.",not in supplied files
+Speaker recognition,Recognize who is speaking from voice characteristics.,not in supplied files
+Speech sentiment analysis,"Derive tone, pace, interruption patterns, or predicted sentiment from speech.",not in supplied files
+Speech emotion analysis,Estimate emotional state from features of speech.,not in supplied files
+Ultrasonic device linkage,Use signals outside normal hearing to infer that two devices are near one another.,not in supplied files
+Ambient-audio device linkage,Infer from background audio that devices share a place or media environment.,not in supplied files
+Fingerprint databases,Store fingerprints for criminal-justice and identity matching.,not in supplied files
+AFIS,Automatically match fingerprints against stored records.,approx. 1980s
+IAFIS,Operate the FBI’s national automated fingerprint identification system.,1999
+NGI,Succeed IAFIS as the FBI’s Next Generation Identification system.,2011
+Iris recognition,"Identify people from iris patterns for access control, border systems, or authentication.",not in supplied files
+Retina recognition,Identify people from retinal patterns.,not in supplied files
+Palm biometrics,Identify people from palm features.,unknown
+Hand geometry,Verify identity from hand shape for access control or timekeeping.,not in supplied files
+Vascular/vein biometrics,Identify people from vein patterns.,not in supplied files
+Keystroke dynamics,Recognize or score a user from typing rhythm.,not in supplied files
+Mouse dynamics,Recognize or score a user from mouse movement.,not in supplied files
+Touch-gesture biometrics,Recognize or score a user from touch and gesture patterns.,not in supplied files
+Eye tracking,"Record gaze direction, fixation, and attention.",not in supplied files
+Pupil tracking,"Measure pupil response, which can expose behavioral or cognitive information.",not in supplied files
+Heart-rate sensing,Measure heart rate through wearables and health systems.,not in supplied files
+ECG sensing,Record the heart’s electrical rhythm.,not in supplied files
+Face-based emotion inference,Attempt to infer expressions or emotional state from facial motion.,not in supplied files
+Border biometric screening,Connect travelers’ fingerprints or faces with identity databases at the border.,not in supplied files
+Airport biometric screening,Check travelers’ biometrics at airports.,not in supplied files
+Biometric e-gates,Automate border passage by matching a traveler to a document or record.,not in supplied files
+Biometric passports,Store biometric data inside a travel document.,not in supplied files
+Face-based boarding,Board travelers by matching their face to identity records.,not in supplied files
+CODIS,"Connect forensic DNA evidence, people, relatives, and cases.",1990 pilot
+NDIS,Operate the national level of the U.S. forensic DNA index.,1998 national
+Direct-to-consumer DNA testing,Test consumers’ DNA outside forensic settings.,2007
+Genetic genealogy,Connect DNA profiles to relatives and family trees.,not in supplied files
+Call detail records,"Record numbers, times, durations, and routing for calls.",pre-1975
+SMS metadata,"Record sender, recipient, timing, and routing for text messages.",not in supplied files
+MMS metadata,"Record sender, recipient, timing, and routing for multimedia messages.",not in supplied files
+Retained SMS/MMS content,Store message content or backups.,not in supplied files
+Cell-site location information (CSLI),"Record which cell sites a phone connected to, and when.",not in supplied files
+Cell-tower triangulation,Estimate a handset’s location from several radio observations.,not in supplied files
+Cellular network positioning,Locate a device from network-side measurements without ordinary GPS.,not in supplied files
+Wireless E911 location,Send a mobile caller’s location to emergency services.,1996 rules; 2001 rollout
+Handset GPS,Let the phone measure its own location directly.,not in supplied files
+Assisted GPS (A-GPS),Speed up phone positioning with help from the network.,not in supplied files
+Carrier location services,Provide a handset’s location through the mobile carrier.,not in supplied files
+Location history services,"Turn repeated coordinates into visits, routes, and home or work estimates.",not in supplied files
+Location-data brokers,Sell or license location data and the audience categories derived from it.,not in supplied files
+IMSI catchers,Imitate cellular infrastructure to obtain nearby device identifiers or locate phones.,not in supplied files
+Cell-site simulators,Imitate a cell site to identify or locate nearby phones.,not in supplied files
+SIM registries,Link SIM cards to subscriber accounts.,not in supplied files
+IMEI registries,Distinguish handsets by equipment identifier.,not in supplied files
+Subscriber registries,Hold the identity behind a mobile account.,not in supplied files
+SS7 signaling records,Route calls and sessions and record where devices register.,not in supplied files
+Roaming records,Record when and where a device uses another network.,not in supplied files
+5G location records,Record device registration and location in 5G networks.,not in supplied files
+Web-server logs,"Record URLs, times, IP addresses, referrers, and devices for each request.",not in supplied files
+Browser history logs,Store the pages a browser has visited.,not in supplied files
+ISP connection logs,Record the connections an access provider carries.,not in supplied files
+DNS query logs,"Record domain lookups, even when page content is encrypted.",not in supplied files
+Deep packet inspection,"Inspect traffic beyond routing data for security, network management, filtering, censorship, or surveillance.",not in supplied files
+Enterprise proxy logs,Record connection activity on managed networks.,not in supplied files
+VPN logs,Record connections made through a VPN.,not in supplied files
+TLS interception,Decrypt and inspect encrypted application traffic on managed networks.,not in supplied files
+HTTP cookies,Give websites memory across requests.,approx. 1994
+Third-party cookies,Let a company other than the visited site receive identifiers across sites.,not in supplied files
+Tracking pixels,Send page or event signals to a third party.,not in supplied files
+Third-party web trackers,Collect cross-site events for measurement and behavioral advertising.,not in supplied files
+Advertising networks,"Convert page views, searches, app events, and purchases into targeting and measurement.",not in supplied files
+Targeted advertising,Select advertising from tracked activity and inferred interests.,not in supplied files
+Real-time bidding,Distribute information about an ad opportunity in millisecond auctions.,not in supplied files
+Browser fingerprinting,Recognize a browser from its configuration without relying only on a cookie.,not in supplied files
+Device fingerprinting,Recognize a device from observable software and hardware characteristics.,not in supplied files
+Canvas fingerprinting,Add identifying detail from how a browser renders graphics.,not in supplied files
+WebGL fingerprinting,Add identifying detail from graphics-hardware behavior.,not in supplied files
+Font fingerprinting,Add identifying detail from installed fonts.,not in supplied files
+Audio fingerprinting,Add identifying detail from audio-processing behavior.,not in supplied files
+Mobile advertising IDs,"Supply a software identifier that connects events across apps, campaigns, and ad services.",not in supplied files
+App analytics/advertising SDKs,Embed analytics and advertising libraries that report events from inside apps.,not in supplied files
+App permission and sensor access,"Give an app access to location, contacts, nearby devices, camera, microphone, or motion.",not in supplied files
+Search histories,Record search queries that expose interests and intent.,not in supplied files
+Clickstream and engagement logs,"Record result clicks, scrolling, dwell time, and navigation sequences.",not in supplied files
+Session replay,"Reconstruct how a website session unfolded from mouse, scroll, and form activity.",not in supplied files
+Fine-grained web interaction logs,Log detailed interactions with page elements.,not in supplied files
+Browser autofill stores,Keep identity fields so a browser can fill later forms.,not in supplied files
+Password-manager stores,Store credentials so they can be filled in later.,not in supplied files
+Password breach databases,"Make compromised credentials searchable for account defense, crime, or security intelligence.",not in supplied files
+Password reuse databases,Detect credentials reused across services.,not in supplied files
+Browser-extension collection,"See webpages, browsing activity, or input, depending on permissions.",not in supplied files
+Email metadata,"Expose sender, recipient, dates, routing, and message IDs apart from content.",not in supplied files
+Email content scanning,"Inspect messages for spam, phishing, malware, indexing, or other classification.",not in supplied files
+Spam filtering,Classify messages as unwanted from their content or features.,not in supplied files
+Cloud backups,Copy device data to remote infrastructure for backup.,not in supplied files
+Cloud synchronization,Keep data copied across devices through remote servers.,not in supplied files
+Cloud audit logs,"Record account and API actions: who acted, where, and when.",not in supplied files
+CDN access logs,Record requests served through content-delivery networks.,not in supplied files
+Object-access logs,Record which stored objects were accessed.,not in supplied files
+Authentication logs,"Record logins, network addresses, and devices.",not in supplied files
+SSO logs,Record sign-ins across services that share one identity provider.,not in supplied files
+Bot-detection telemetry,"Collect browser, network, and behavior signals to judge whether a session is automated.",not in supplied files
+Fraud-detection telemetry,"Collect device, account, and behavior signals to estimate whether a session is trustworthy.",not in supplied files
+Social-media activity and geotag logs,"Record posts, likes, follows, views, timestamps, and locations.",not in supplied files
+Social-media scraping and sentiment analysis,"Harvest and score public posts for advertising, intelligence, research, or profiling.",not in supplied files
+EXIF metadata,Embed time and camera details in a photograph file.,not in supplied files
+Photo GPS metadata,Embed GPS coordinates in a photograph file.,not in supplied files
+Streaming viewing logs,"Record what was streamed, when, and on which device.",not in supplied files
+Set-top-box viewing logs,Record viewing through cable or satellite boxes.,not in supplied files
+Smart-TV viewing logs,Record viewing on connected televisions.,not in supplied files
+Card transaction records,"Link merchant, amount, time, location, and account for each card payment.",pre-1975
+ATM transaction/camera records,Combine cash-machine transactions with camera footage.,not in supplied files
+Point-of-sale records,"Record purchases at the register, sometimes item by item.",not in supplied files
+Loyalty-program histories,Turn separate shopping trips into one longitudinal purchase history.,not in supplied files
+E-commerce history,"Retain searches, views, carts, purchases, returns, and delivery addresses.",not in supplied files
+Digital receipts,Keep itemized purchase records electronically.,not in supplied files
+AML transaction monitoring,Analyze transactions and counterparties for suspicious activity.,not in supplied files
+KYC identity records,Verify and record customer identity.,not in supplied files
+Financial fraud monitoring,"Flag unusual transactions, devices, or patterns.",not in supplied files
+Credit bureau files,Hold structured financial histories.,not in supplied files
+Credit scoring,Derive an assessment used in lending and identity decisions.,not in supplied files
+Insurance claims records,Record a person’s insurance-claims history.,not in supplied files
+Usage-based insurance telematics,Measure driving behavior directly for insurance pricing.,not in supplied files
+Data brokers,Aggregate data from many sources into consumer records.,not in supplied files
+People-search services,Assemble public records and brokered data into person-level reports.,not in supplied files
+Background-check services,"Compile records such as address histories, criminal records, and employment information.",not in supplied files
+Digitized public records,"Turn court, property, election, and other public records into searchable databases.",not in supplied files
+DMV photo databases,Store driver photographs alongside identity records.,not in supplied files
+Driver identity records,"Combine names, addresses, dates of birth, and vehicle ownership.",not in supplied files
+Postal mail imaging,Create machine-readable images of mail during sorting and delivery.,not in supplied files
+Package barcode scans,Record a package at each point on its route.,not in supplied files
+RFID inventory tracking,Identify tagged objects without optical line of sight.,not in supplied files
+Electronic article surveillance/RFID anti-theft tags,Detect tagged items as they leave a store.,not in supplied files
+NFC checkout,Combine proximity radio with a payment event.,not in supplied files
+Biometric checkout,Combine a biometric check with a payment event.,not in supplied files
+RFID access cards,Open doors while creating time-stamped access events.,not in supplied files
+Electronic keys and badges,Record entries through employee badges or hotel keys.,not in supplied files
+Transit smart cards,"Record station, time, and card identifier at each fare tap.",not in supplied files
+Electronic toll transponders,Record that a credential or vehicle passed a roadway reader at a specific time.,not in supplied files
+Bluetooth Classic telemetry,Expose identifiers and presence while devices connect.,not in supplied files
+Bluetooth Low Energy (BLE),"Support low-power connection, proximity, and positioning in phones, wearables, and homes.",not in supplied files
+Bluetooth beacons,Estimate indoor proximity and movement from fixed or mobile transmitters.,not in supplied files
+Bluetooth retail tracking,Follow shoppers’ devices through stores using Bluetooth.,not in supplied files
+Bluetooth item trackers,Locate a small tag through nearby phones.,not in supplied files
+Crowdsourced finding networks,Use many consumer devices to report where tags are.,not in supplied files
+Wi-Fi probe-request tracking,Observe phones searching for Wi‑Fi networks.,not in supplied files
+Wi-Fi MAC-address tracking,"Link observed device addresses to repeat visits and, in some cases, a named user.",not in supplied files
+Wi-Fi association logs,Record when a device joined a network.,not in supplied files
+Wi-Fi positioning databases,Estimate physical location from databases of Wi‑Fi access points.,not in supplied files
+Ultra-wideband ranging,Measure fine short-range distance for item finding and access control.,not in supplied files
+Fleet GPS tracking,"Report a commercial vehicle’s route, position, and speed continuously.",not in supplied files
+Fleet vehicle telematics,Report vehicle and driver events from fleets.,not in supplied files
+Connected-car telematics services,Keep a cellular data channel open between a vehicle and external systems.,not in supplied files
+Vehicle event data recorders,"Store pre-crash dynamics, driver inputs, crash characteristics, and restraint status.",1994
+OBD-II telemetry,Expose vehicle state through the diagnostic port.,not in supplied files
+Plug-in GPS/cellular vehicle dongles,"Add GPS and cellular reporting to diagnostic data for insurance, road charging, fleets, or maintenance.",not in supplied files
+Infotainment history,"Store destinations, calls, media, contacts, and paired devices in the car.",not in supplied files
+Navigation and paired-device history,Store routes and phones paired with the vehicle.,not in supplied files
+Ride-hailing telemetry,"Record trip requests, pickup points, drop-offs, routes, and drivers.",not in supplied files
+Delivery-app telemetry,"Record orders, couriers, and delivery routes.",not in supplied files
+Micromobility telemetry,Record scooter and bike trips.,not in supplied files
+Passenger Name Records (PNR),"Link identity with itinerary, booking, contact, payment, and travel history.",not in supplied files
+Advance Passenger Information (API),Provide passenger identity data to border systems.,not in supplied files
+ADS-B broadcasts,"Broadcast aircraft state for safety, observable by any receiver.",not in supplied files
+V2X broadcasts,Broadcast vehicle state for safety and traffic coordination.,not in supplied files
+Smart electricity meters,Replace occasional manual readings with finer time-series electricity data.,approx. 2000s
+Smart gas meters,Replace occasional manual readings with finer time-series gas data.,not in supplied files
+Smart water meters,Replace occasional manual readings with finer time-series water data.,not in supplied files
+Utility interval data,Describe when demand changes inside a household.,not in supplied files
+Smart thermostats,"Record temperature changes, motion, and heating or cooling activity.",not in supplied files
+Home occupancy sensors,Indicate when rooms or homes are occupied.,unknown
+Smart locks,"Record entries, lock state, and remote actions.",not in supplied files
+Home alarm systems,"Record arming, sensor events, and alarms.",not in supplied files
+Baby monitors,Stream audio and video from a child’s room to remote viewers.,not in supplied files
+Home security cameras,Stream and store home video events in the cloud.,not in supplied files
+Robot-vacuum mapping,Build a spatial map of a home’s interior as a by-product of cleaning.,not in supplied files
+Smart-appliance telemetry,"Report appliance status, faults, usage, and commands to vendors.",not in supplied files
+General IoT telemetry,"Report device state, firmware, and environment data to cloud services.",not in supplied files
+Smart-city environmental sensors,"Measure air quality, noise, and other urban conditions.",not in supplied files
+Traffic-flow sensors,Measure vehicle flows on streets.,not in supplied files
+Footfall sensors,Count people moving through public spaces.,not in supplied files
+Smart parking/streetlight sensors,Detect occupied parking spaces and estimate flows.,not in supplied files
+Building occupancy systems,"Estimate where people are inside offices, hospitals, factories, or campuses.",not in supplied files
+Real-time location systems (RTLS),"Locate people or assets indoors from badge, Wi‑Fi, BLE, or RFID signals.",not in supplied files
+Electronic health records,"Combine diagnoses, visits, medications, tests, billing, and communications.",not in supplied files
+E-prescribing records,"Log medication decisions across clinicians, pharmacies, and insurers.",not in supplied files
+Prescription drug monitoring programs,Log controlled-substance prescriptions in state monitoring systems.,not in supplied files
+Health-insurance claims,"Record billed care, which can expose conditions and treatment patterns.",not in supplied files
+Pharmacy records,Record dispensed medications.,not in supplied files
+Fitness trackers,"Measure activity, steps, sleep, and later heart rate outside the clinic.",not in supplied files
+Smartwatches,Collect activity and physiological data on the wrist.,not in supplied files
+Fitness-app sharing,"Combine device signals with entered diet, exercise, sleep, mood, or medication data.",not in supplied files
+Continuous glucose monitors,Send frequent glucose readings rather than occasional clinic measurements.,not in supplied files
+Connected medical devices,Send physiological readings from medical devices to remote systems.,not in supplied files
+Implant telemetry,Send operating and patient information from implanted devices to external monitoring.,not in supplied files
+Telehealth platforms,"Generate video, notes, device readings, account logs, and billing from remote care.",not in supplied files
+Period-tracking apps,"Record menstrual-cycle information, sometimes outside medical-privacy rules.",not in supplied files
+Fertility apps,"Record fertility information, sometimes outside medical-privacy rules.",not in supplied files
+Mental-health apps,"Record mood and mental-health information, sometimes outside medical-privacy rules.",not in supplied files
+Medical imaging systems,Create long-lived clinical images with patient and examination metadata.,not in supplied files
+PACS,Store and share medical images across networks.,not in supplied files
+Work email monitoring,"Retain employee email and metadata for security, compliance, and investigation.",not in supplied files
+Work communications monitoring,"Retain workplace messages and metadata for security, compliance, and investigation.",not in supplied files
+Keystroke and mouse monitoring,Measure computer activity directly from keystrokes and mouse movement.,not in supplied files
+Screen and webcam monitoring,Capture an employee’s screen or webcam image.,not in supplied files
+Productivity scores,"Convert monitoring data into rankings, inactivity indicators, or performance scores.",not in supplied files
+Endpoint monitoring,"Record files, processes, devices, and network connections on work computers.",not in supplied files
+Data-loss-prevention (DLP) monitoring,"Detect clipboard, transfer, or other attempts to move sensitive data.",not in supplied files
+Employee GPS tracking,Reconstruct a worker’s location from phones or fleet telematics.,not in supplied files
+Employee badge tracking,Reconstruct a worker’s movement from building badge events.,not in supplied files
+Warehouse scanner telemetry,Record each scan as both an inventory event and a measure of task pace.,not in supplied files
+Call-center speech analytics,"Transcribe and score calls for compliance, sentiment, script adherence, or agent performance.",not in supplied files
+Remote exam proctoring,"Combine identity checks, webcam, microphone, screen capture, and behavior flags during exams.",not in supplied files
+Learning-management-system analytics,"Track reading, submissions, quiz attempts, and time-on-task.",not in supplied files
+Education platform analytics,Track clicks and predict student progress.,not in supplied files
+RFID student IDs,"Combine attendance, building access, library, and payment events on campus.",not in supplied files
+Student access-card systems,"Record building, library, payment, or transport use with a campus card.",not in supplied files
+FISA electronic surveillance,Provide the U.S. statutory framework for foreign-intelligence electronic surveillance.,not in supplied files
+CALEA lawful-intercept capability,Require covered carriers to maintain capabilities for authorized interception.,not in supplied files
+NSA post-9/11 bulk telephony metadata collection,Collect call-detail records in bulk for counterterrorism contact analysis.,not in supplied files
+Section 215 bulk telephony metadata program,Continue bulk call-detail collection under FISA Court Section 215 orders.,not in supplied files
+PRISM provider collection,Obtain targeted foreign-intelligence communications with compelled help from providers.,approx. 2007; Section 702 from 2008
+Section 702 provider collection,Collect targeted foreign-intelligence communications from electronic communications providers.,not in supplied files
+Section 702 upstream collection,Collect qualifying communications as they cross Internet infrastructure.,not in supplied files
+Fusion centers,Join information from several agencies so events can be correlated.,not in supplied files
+Suspicious Activity Reporting systems,Collect suspicious-activity reports from many reporting channels.,not in supplied files
+Gang databases,"Record alleged associations as persistent, queryable records.",not in supplied files
+Government watchlists,"Flag people during policing, border control, or aviation security.",not in supplied files
+Predictive policing,Rank locations or subjects for patrol or investigative attention.,not in supplied files
+Algorithmic criminal-risk scores,"Estimate risk categories for pretrial, sentencing, supervision, or corrections decisions.",not in supplied files
+Link analysis,"Model relationships among people, accounts, calls, addresses, devices, vehicles, and transactions.",not in supplied files
+Geofence warrants,Seek information about devices that may have been at a place and time.,not in supplied files
+Reverse search demands,Seek accounts associated with a search query.,not in supplied files
+Keyword search warrants/demands,Seek accounts that searched for a particular keyword.,not in supplied files
+Government social-media monitoring,"Use public posts, connections, and geotags in threat assessment or investigations.",not in supplied files
+Identity graphs,"Infer that several devices, cookies, accounts, or addresses belong to one person or household.",not in supplied files
+Location-derived audience segments,"Turn raw coordinates into categories such as commuter, traveler, or venue visitor.",not in supplied files
+Dwell-time analytics,Measure time spent and paths taken through stores.,not in supplied files
+Visitation analytics,Measure repeat visits.,not in supplied files
+Surveillance pricing,"Use behavioral, demographic, device, location, and browsing signals to personalize offers or prices.",unknown
+Fraud risk scores,Combine observations into a fraud estimate that can trigger checks or denial.,not in supplied files
+Trust scores,Estimate whether an account or session should be trusted.,not in supplied files
+Insider-risk scores,Flag employee activity that software rates as risky.,not in supplied files
+Anomaly detection,Flag deviations from a learned or specified model of normal activity.,not in supplied files
+Crowd-density analytics,"Estimate population density and flows from video, radio, or location data.",not in supplied files
+Trajectory reconstruction,Reconstruct a path across many individual sensors.,not in supplied files

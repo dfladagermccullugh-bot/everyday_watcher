@@ -1,0 +1,153 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #0b0b0c;
+  --color-ink-2: #121214;
+  --color-ink-3: #19191c;
+  --color-ink-4: #232327;
+  --color-paper: #f2eee6;
+  --color-paper-2: #bdb7ac;
+  --color-paper-3: #8e897f;
+  --color-line: rgb(242 238 230 / 0.09);
+  --color-line-2: rgb(242 238 230 / 0.16);
+  --color-line-3: rgb(242 238 230 / 0.28);
+  --color-doc: #f2eee6;
+  --color-ill: #82a9f5;
+  --color-sig-visual: #e8a951;
+  --color-sig-audio: #e58fa8;
+  --color-sig-radio: #57c4b5;
+  --color-sig-network: #82a9f5;
+  --color-sig-transaction: #cdd06a;
+  --color-sig-body: #ee8b6b;
+  --color-sig-sensor: #9ccb98;
+  --color-sig-derived: #b8a2f3;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: var(--font-serif-display), 'Iowan Old Style', Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --text-display: clamp(3rem, 1.6rem + 6.2vw, 7.5rem);
+  --text-display--line-height: 0.95;
+  --text-title: clamp(2.1rem, 1.4rem + 2.8vw, 3.75rem);
+  --text-title--line-height: 1.04;
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+:root {
+  color-scheme: dark;
+  --nav-h: 56px;
+}
+
+html {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+}
+
+body {
+  background: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: 'ss01', 'cv11';
+  min-height: 100dvh;
+  overflow-x: clip;
+}
+
+::selection {
+  background: rgb(232 169 81 / 0.35);
+  color: var(--color-paper);
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-paper);
+    outline-offset: 3px;
+  }
+}
+
+/* Hairline grid used as a quiet structural motif */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(242 238 230 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(242 238 230 / 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-paper-3);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 160px;
+}
+
+/* Fade edges for horizontally scrolling chip rows */
+.fade-x {
+  mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 24px), transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes ping-soft {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+.animate-ping-soft {
+  animation: ping-soft 2.4s var(--ease-out-quint) infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-rise {
+  animation: rise 0.8s var(--ease-out-quint) both;
+}

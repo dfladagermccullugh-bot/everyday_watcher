@@ -1,0 +1,130 @@
+// Relationships between inventory rows.
+// basis "documented": the cited report line states the relationship.
+// basis "illustrative": a plausible example the report does not state. Shown dashed
+// and labeled as such everywhere in the interface.
+// [fromRow, toRow, type, basis, line, note]
+//   type: feeds (data from A is used by B) · extends · succeeds · authorizes
+//         alternative · combines
+
+export const RELATIONS = [
+  // Visual
+  [1, 13, 'feeds', 'documented', 29, 'Modern public camera systems add search, object detection, and other video analytics.'],
+  [2, 13, 'feeds', 'documented', 43, 'Video need not be reviewed by a person; software can count, detect, and flag.'],
+  [13, 14, 'extends', 'documented', 43, 'Analytics can reconstruct movement through multiple cameras.'],
+  [1, 15, 'feeds', 'documented', 5, 'A camera image can now be joined to a face template.'],
+  [1, 10, 'feeds', 'documented', 5, 'A camera image can now be joined to a license plate.'],
+  [7, 10, 'combines', 'documented', 37, 'Road cameras often combine imagery, time, direction, speed, and plate data.'],
+  [10, 11, 'extends', 'documented', 41, 'The same basic technology is used for garage entry and parking enforcement.'],
+  [10, 12, 'extends', 'documented', 41, 'The same basic technology is used for toll billing.'],
+  [15, 16, 'extends', 'documented', 47, 'Live systems compare a stream with a watchlist rather than searching after an event.'],
+  [16, 17, 'feeds', 'documented', 47, 'Live recognition compares camera streams with watchlists.'],
+  [20, 150, 'feeds', 'documented', 51, 'Image matching can connect a photo posted in one context with accounts in another.'],
+  [40, 284, 'feeds', 'documented', 357, 'Retail systems turn camera observations into time spent and store paths.'],
+  [158, 157, 'combines', 'documented', 193, 'ATM systems can combine transaction data with camera footage.'],
+  [10, 292, 'feeds', 'illustrative', 365, 'Plate reads at many points are one kind of observation from which a path could be reconstructed.'],
+  [10, 277, 'feeds', 'illustrative', 343, 'Link analysis models relationships among vehicles and other entities; the report does not tie it to ALPR specifically.'],
+  [174, 15, 'feeds', 'illustrative', 211, 'DMV records increasingly include digital photographs; the report does not state that they are searched by face recognition.'],
+
+  // Biometrics
+  [58, 59, 'extends', 'documented', 95, 'Automated matching turned fingerprint files into a criminal-justice tool.'],
+  [59, 60, 'succeeds', 'documented', 438, 'Local AFIS preceded the FBI’s national IAFIS.'],
+  [60, 61, 'succeeds', 'documented', 97, 'NGI is the successor to IAFIS.'],
+  [80, 81, 'extends', 'documented', 440, 'The CODIS pilot preceded the national NDIS level.'],
+  [82, 83, 'feeds', 'documented', 113, 'Consumer DNA testing created large non-forensic DNA databases.'],
+
+  // Telecom and location
+  [84, 266, 'feeds', 'documented', 329, 'The bulk program used large volumes of call-detail records.'],
+  [84, 267, 'feeds', 'documented', 329, 'Section 215 orders covered the same call-detail records.'],
+  [266, 267, 'succeeds', 'documented', 329, 'The program moved under FISA Court Section 215 orders in May 2006.'],
+  [264, 267, 'authorizes', 'documented', 329, 'Section 215 orders were issued by the FISA Court.'],
+  [264, 269, 'authorizes', 'documented', 402, 'Section 702 is part of FISA.'],
+  [268, 269, 'succeeds', 'documented', 462, 'PRISM originated under the Protect America Act and continued under Section 702.'],
+  [269, 270, 'extends', 'documented', 333, 'Upstream is a separate Section 702 collection method.'],
+  [265, 42, 'authorizes', 'documented', 75, 'CALEA requires carriers to preserve capabilities for authorized surveillance.'],
+  [265, 43, 'authorizes', 'documented', 327, 'Covered carriers must maintain technical interception capabilities.'],
+  [88, 91, 'feeds', 'documented', 121, 'FCC wireless-location rules formalized location capabilities for emergency response.'],
+  [92, 91, 'feeds', 'illustrative', 127, 'Phones became direct location sensors; the report does not detail how E911 uses handset GPS.'],
+  [89, 91, 'feeds', 'illustrative', 123, 'Network positioning can estimate location without GPS.'],
+  [126, 95, 'feeds', 'documented', 129, 'Mobile advertising systems can turn repeated coordinates into visits and routes.'],
+  [127, 95, 'feeds', 'documented', 129, 'Apps can turn repeated coordinates into visits, routes, and home/work estimates.'],
+  [92, 95, 'feeds', 'illustrative', 127, 'Handset GPS is one source of the coordinates; the report does not name the source.'],
+  [95, 96, 'feeds', 'documented', 129, 'Location history can be sold; the FTC has taken action on sensitive location data.'],
+  [95, 283, 'feeds', 'documented', 355, 'Raw coordinates can be converted into audience categories.'],
+  [96, 283, 'feeds', 'documented', 129, 'Brokered location data can become audience categories.'],
+  [97, 100, 'feeds', 'documented', 131, 'Simulators obtain nearby device identifiers.'],
+  [99, 84, 'combines', 'documented', 133, 'Subscriber identifiers can be linked with calls.'],
+  [100, 88, 'combines', 'documented', 133, 'Equipment identifiers can be linked with locations.'],
+  [99, 103, 'combines', 'documented', 133, 'Identifiers can be linked with roaming.'],
+  [278, 95, 'feeds', 'illustrative', 345, 'Geofence demands seek devices at a place and time; the report does not name the record type sought.'],
+
+  // Web and advertising
+  [113, 114, 'extends', 'documented', 149, 'Third-party cookies extend cookies across sites.'],
+  [114, 117, 'feeds', 'documented', 149, 'Third-party cookies became a foundation of behavioral advertising.'],
+  [115, 117, 'feeds', 'documented', 149, 'Pixels let a third party receive identifiers or events.'],
+  [116, 117, 'feeds', 'documented', 149, 'Trackers support cross-site measurement and advertising.'],
+  [117, 119, 'feeds', 'documented', 153, 'Automated auctions distribute information about each ad opportunity.'],
+  [117, 118, 'feeds', 'documented', 151, 'Ad systems convert tracked activity into targeting.'],
+  [120, 113, 'alternative', 'documented', 155, 'Fingerprinting can recognize a browser without relying only on a cookie.'],
+  [122, 120, 'feeds', 'documented', 157, 'Canvas rendering adds entropy to the identifier.'],
+  [123, 120, 'feeds', 'documented', 157, 'WebGL adds entropy to the identifier.'],
+  [124, 120, 'feeds', 'documented', 157, 'Fonts add entropy to the identifier.'],
+  [125, 120, 'feeds', 'documented', 157, 'Audio behavior adds entropy to the identifier.'],
+  [126, 117, 'feeds', 'documented', 159, 'Ad IDs connect events across apps, campaigns, and ad services.'],
+  [128, 127, 'feeds', 'documented', 161, 'A permission can give an app location, contacts, camera, microphone, or motion data.'],
+  [113, 282, 'feeds', 'documented', 353, 'Identity graphs infer that several cookies belong to one person.'],
+  [126, 282, 'feeds', 'documented', 353, 'Identity graphs join devices to people or households.'],
+  [146, 282, 'feeds', 'documented', 353, 'Identity graphs join accounts to people or households.'],
+  [282, 170, 'feeds', 'documented', 353, 'Data-broker systems use identity resolution.'],
+  [129, 279, 'feeds', 'documented', 347, 'Reverse demands begin with a search term and seek associated accounts.'],
+  [129, 286, 'feeds', 'documented', 359, 'Browsing signals can be used to personalize prices.'],
+  [283, 286, 'feeds', 'documented', 359, 'Location signals can be used to personalize prices.'],
+  [152, 150, 'feeds', 'documented', 185, 'Image metadata and geotags are part of social-media signals.'],
+  [150, 281, 'feeds', 'documented', 349, 'Public posts, connections, and geotags can feed government monitoring.'],
+  [150, 151, 'feeds', 'documented', 185, 'Posts can be scraped and scored.'],
+  [148, 288, 'feeds', 'documented', 361, 'Telemetry becomes important once combined into a trust estimate.'],
+  [149, 287, 'feeds', 'documented', 361, 'Telemetry becomes important once combined into a fraud estimate.'],
+  [51, 156, 'feeds', 'documented', 189, 'Screen-level recognition produced Vizio’s viewing dataset.'],
+  [156, 117, 'feeds', 'documented', 189, 'Viewing data became an advertising and analytics dataset.'],
+
+  // Finance, retail, brokers
+  [157, 163, 'feeds', 'documented', 199, 'Banks analyze transactions for suspicious activity.'],
+  [157, 165, 'feeds', 'documented', 199, 'Payment processors analyze transactions to detect fraud.'],
+  [165, 287, 'feeds', 'documented', 361, 'Raw observations are combined into risk estimates.'],
+  [166, 167, 'feeds', 'documented', 201, 'Automated scoring adds a derived assessment to bureau records.'],
+  [160, 170, 'feeds', 'illustrative', 205, 'Brokers hold consumer transactions; the report does not name loyalty data as a source.'],
+  [173, 171, 'feeds', 'documented', 207, 'People-search sites draw on public records.'],
+  [170, 171, 'feeds', 'documented', 207, 'People-search reports include brokered data.'],
+  [192, 285, 'feeds', 'documented', 233, 'Wi‑Fi identifiers can be linked to repeat visits.'],
+  [193, 284, 'feeds', 'documented', 357, 'Retail analytics use mobile identifiers to track movement.'],
+  [189, 284, 'feeds', 'documented', 357, 'Radio observations become store paths and dwell time.'],
+  [202, 169, 'feeds', 'documented', 245, 'Diagnostic data plus a GPS/cellular device can serve insurance.'],
+
+  // Work
+  [250, 252, 'feeds', 'documented', 307, 'Monitoring data can be converted into productivity scores.'],
+  [251, 252, 'feeds', 'documented', 307, 'Monitoring data can be converted into productivity scores.'],
+  [253, 289, 'feeds', 'documented', 361, 'Endpoint observations can be combined into insider-risk scores.'],
+  [254, 289, 'feeds', 'documented', 361, 'DLP events can be combined into insider-risk scores.'],
+  [44, 258, 'feeds', 'documented', 315, 'Recorded calls can be transcribed and scored.'],
+  [182, 256, 'feeds', 'documented', 311, 'Badge events reconstruct physical location.'],
+  [197, 255, 'feeds', 'documented', 311, 'Fleet telematics reconstruct a worker’s location.'],
+  [182, 229, 'feeds', 'documented', 275, 'Badge signals estimate building occupancy.'],
+
+  // Home and health
+  [212, 215, 'feeds', 'documented', 259, 'Smart meters produce interval data.'],
+  [213, 215, 'feeds', 'documented', 259, 'Smart meters produce interval data.'],
+  [214, 215, 'feeds', 'documented', 259, 'Smart meters produce interval data.'],
+  [48, 49, 'extends', 'documented', 83, 'Smart speakers carry voice assistants.'],
+  [236, 238, 'feeds', 'documented', 289, 'Health apps combine device signals with entered data.'],
+  [237, 238, 'feeds', 'documented', 289, 'Health apps combine device signals with entered data.'],
+  [72, 237, 'extends', 'documented', 287, 'The first Apple Watch included a heart-rate sensor.'],
+  [232, 233, 'feeds', 'documented', 281, 'Medication decisions can be logged in state monitoring systems.'],
+
+  // Government and inference
+  [272, 271, 'feeds', 'documented', 335, 'Fusion centers join information from reporting channels.'],
+  [277, 271, 'feeds', 'illustrative', 343, 'Intelligence systems use link analysis; the report does not tie it to fusion centers specifically.'],
+  [13, 291, 'feeds', 'documented', 365, 'Video systems can derive crowd density.'],
+  [88, 292, 'feeds', 'documented', 365, 'Radio and location systems can reconstruct a path.'],
+  [14, 292, 'extends', 'documented', 365, 'Trajectory reconstruction across many sensors generalizes multi-camera tracking.'],
+  [84, 277, 'feeds', 'documented', 343, 'Link analysis models relationships among calls.'],
+  [157, 277, 'feeds', 'documented', 343, 'Link analysis models relationships among transactions.'],
+];
