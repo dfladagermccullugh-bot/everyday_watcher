@@ -15,7 +15,7 @@ const description =
   'An interactive atlas of 292 surveillance and data-collection systems: how much of an ordinary day is observed, recorded, analyzed, inferred, or stored, and how we got here.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://invisible-infrastructure.example'),
+  metadataBase: new URL('https://invisible-infrastructure.netlify.app'),
   title: { default: 'The Invisible Infrastructure', template: '%s · The Invisible Infrastructure' },
   description,
   openGraph: { title: 'The Invisible Infrastructure', description, type: 'website' },

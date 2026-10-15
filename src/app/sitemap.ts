@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { entries } from '@/lib/data';
 
 export const dynamic = 'force-static';
-const BASE = 'https://invisible-infrastructure.example';
+const BASE = 'https://invisible-infrastructure.netlify.app';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = ['', 'timeline/', 'atlas/', 'connections/', 'follow/', 'plates/', 'sources/', 'sources/report/', 'sources/dataset/'];
